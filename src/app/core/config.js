@@ -6,9 +6,9 @@ export const appversion = process.env.REACT_APP_VERSION;
 export const serviceuri = process.env.REACT_APP_SERVICE_URI;
 
 export const persistconfig = {
-  key: 'localhost.github.notifications',
   storage,
-  whitelist: ['githubtoken'],
+  key: 'localhost.github.notifications',
+  whitelist: ['githubtoken', 'subscriptions'],
 };
 
 export const usedebug = () => nodenv === 'development';

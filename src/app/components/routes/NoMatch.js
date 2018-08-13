@@ -29,7 +29,6 @@ class NoMatch extends React.PureComponent {
   }
 
   render() {
-    console.log('render no match');
     const { timing } = this.state;
     const { location } = this.props;
     if (timing < 0) return renderRedirect();

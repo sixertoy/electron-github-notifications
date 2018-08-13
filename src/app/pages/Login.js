@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Form, Field } from 'react-final-form';
 
-import { authentificateUser, storeGithubToken } from '../actions';
+import { storeGithubToken } from '../actions';
 
 const renderTokenField = input => (
   <label htmlFor="githubtoken">
@@ -22,13 +22,11 @@ class Login extends React.PureComponent {
 
   onSubmitForm = ({ githubtoken }) => {
     const { history } = this.props;
-    authentificateUser(githubtoken);
     this.actions.storeGithubToken(githubtoken);
     history.push('/');
   };
 
   render() {
-    console.log('render login page');
     return (
       <Form onSubmit={this.onSubmitForm}
         validate={() => []}

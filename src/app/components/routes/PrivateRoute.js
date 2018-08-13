@@ -1,22 +1,20 @@
 import React from 'react';
-import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route, Redirect, withRouter } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 const renderRedirect = () => <Route render={() => <Redirect to="/login" />} />;
 
-const PrivateRoute = ({ children, location, isauthentificated }) => {
-  const islogin = location.pathname === '/login';
+const PrivateRoute = ({ render, exact, path, isauthentificated }) => {
   const shouldredirect = !isauthentificated;
-  if (islogin) return null;
   if (shouldredirect) return renderRedirect();
-  return children;
+  return <Route exact={exact} path={path} render={render} />;
 };
 
 PrivateRoute.propTypes = {
-  children: PropTypes.node.isRequired,
-  location: PropTypes.object.isRequired,
+  exact: PropTypes.bool.isRequired,
+  path: PropTypes.string.isRequired,
+  render: PropTypes.func.isRequired,
   isauthentificated: PropTypes.bool.isRequired,
 };
 
@@ -24,7 +22,4 @@ const mapStateToProps = ({ githubtoken }) => ({
   isauthentificated: githubtoken !== null,
 });
 
-export default compose(
-  connect(mapStateToProps),
-  withRouter
-)(PrivateRoute);
+export default connect(mapStateToProps)(PrivateRoute);

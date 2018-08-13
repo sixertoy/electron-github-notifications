@@ -15,16 +15,15 @@ import PrivateRoute from './components/routes/PrivateRoute';
 const buildRoute = route => {
   if (!route) return null;
   const { paths, name, icon, links } = route;
-  const Page = route.component;
+  const Component = route.component;
   return paths.map(path => (
-    <PrivateRoute key={slugify(path, 'route')}>
-      <Route exact
-        path={path}
-        render={() => {
-          const pageconfig = { name, icon, path, links };
-          return <Page config={pageconfig} />;
-        }} />
-    </PrivateRoute>
+    <PrivateRoute exact
+      path={path}
+      key={slugify(path, 'route')}
+      render={() => {
+        const pageconfig = { name, icon, path, links };
+        return <Component config={pageconfig} />;
+      }} />
   ));
 };
 

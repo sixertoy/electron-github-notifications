@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 
+import { watched, subscriptions } from './repositories';
+
 const minimized = (state = false, action) => {
   switch (action.type) {
   default:
@@ -32,4 +34,7 @@ export default combineReducers({
   loading,
   minimized,
   githubtoken,
+  // repositories
+  watched,
+  subscriptions,
 });

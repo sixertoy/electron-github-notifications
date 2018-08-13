@@ -3,23 +3,26 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { retrieveNotifications } from '../actions';
+import { retrieveRepositories } from '../actions';
+import Repositories from '../components/Repositories';
 
 class Homepage extends React.PureComponent {
   constructor(props) {
     super(props);
     const { dispatch } = props;
-    this.actions = bindActionCreators({ retrieveNotifications }, dispatch);
+    this.actions = bindActionCreators({ retrieveRepositories }, dispatch);
   }
 
   componentDidMount() {
-    this.actions.retrieveNotifications();
+    this.actions.retrieveRepositories();
   }
 
   render() {
     return (
       <div>
         <h1>Homepage</h1>
+        <h2>Watched Repositories</h2>
+        <Repositories />
       </div>
     );
   }
