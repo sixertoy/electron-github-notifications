@@ -5,9 +5,10 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 // application
+import Manifest from './manifest';
 import { routes } from './routes';
 import { usedebug } from './core/config';
-import { slugify } from './helpers/slugify';
+import { slugify, pagetitle } from './helpers';
 import Login from './pages/Login';
 import NoMatch from './components/routes/NoMatch';
 import PrivateRoute from './components/routes/PrivateRoute';
@@ -29,53 +30,48 @@ const buildRoute = route => {
 
 const getbodyclass = path => `page-${(path && slugify(path)) || 'home'}`;
 
-const PageComponent = ({ version, location, minimized }) => {
-  // const popincss = (popin && 'popin-opened') || '';
-  const navcss = (!minimized && 'nav-opened') || '';
-  return (
-    <div id="app-container" className={`${navcss}`}>
-      <Helmet>
-        <body className={getbodyclass(location.pathname)} />
-        <title>
-          {/* {pagetitle(routes, location.pathname)} */}
-          {usedebug() ? ' | DEV' : ''} | Backoffice
-        </title>
-      </Helmet>
-      {/* <AppNavigation routes={routes} path={location.pathname} /> */}
-      <div id="page-container">
-        <div id="application-header" className="rainbow p30">
-          <h1 className="title">
-            <span>{/* {Manifest.name} */}</span>
-            <small>{/* {Manifest.description} */}</small>
-          </h1>
-          <div className="user align-right" />
+const PageComponent = ({ version, location }) => (
+  <div id="app-container">
+    <Helmet>
+      <body className={getbodyclass(location.pathname)} />
+      <title>
+        {pagetitle(routes.main, location.pathname)}
+        {usedebug() ? ' | DEV' : ''} | Backoffice
+      </title>
+    </Helmet>
+    {/* <AppNavigation routes={routes} path={location.pathname} /> */}
+    <div id="page-container">
+      <div id="application-header" className="rainbow p30">
+        <h1 className="title">
+          <span>{Manifest.name}</span>
+          <small>{Manifest.description}</small>
+        </h1>
+        <div className="user align-right" />
+      </div>
+      {/* <AppBreadcrumbs /> */}
+      <div id="application-body">
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          {routes.main.map(buildRoute)}
+          <Route component={NoMatch} />
+        </Switch>
+      </div>
+      <div id="application-footer"
+        className="flex-columns flex-between p20 mt60">
+        <div className="col-left">
+          <span>{Manifest.copyright}</span>
         </div>
-        {/* <AppBreadcrumbs /> */}
-        <div id="application-body">
-          <Switch>
-            <Route exact path="/login" component={Login} />
-            {routes.main.map(buildRoute)}
-            <Route component={NoMatch} />
-          </Switch>
-        </div>
-        <div id="application-footer"
-          className="flex-columns flex-between p20 mt60">
-          <div className="col-left">
-            <span>{/* {Manifest.copyright} */}</span>
-          </div>
-          <div className="col-right">
-            <span>{`v${version}`}</span>
-          </div>
+        <div className="col-right">
+          <span>{`v${version}`}</span>
         </div>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 PageComponent.defaultProps = {};
 
 PageComponent.propTypes = {
-  minimized: PropTypes.bool.isRequired,
   version: PropTypes.string.isRequired,
   location: PropTypes.object.isRequired,
 };

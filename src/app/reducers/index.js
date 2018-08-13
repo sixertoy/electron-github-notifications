@@ -1,13 +1,7 @@
 import { combineReducers } from 'redux';
 
-import { watched, subscriptions } from './repositories';
-
-const minimized = (state = false, action) => {
-  switch (action.type) {
-  default:
-    return state;
-  }
-};
+import { loading } from './loading';
+import { watched, notifications, subscriptions } from './repositories';
 
 const githubtoken = (state = null, action) => {
   switch (action.type) {
@@ -18,23 +12,11 @@ const githubtoken = (state = null, action) => {
   }
 };
 
-const loading = (state = false, action) => {
-  switch (action.type) {
-  case 'ON_LOADING_START':
-    return true;
-  case 'ON_LOADING_ERROR':
-  case 'ON_LOADING_COMPLETED':
-    return false;
-  default:
-    return state;
-  }
-};
-
 export default combineReducers({
   loading,
-  minimized,
   githubtoken,
   // repositories
   watched,
+  notifications,
   subscriptions,
 });

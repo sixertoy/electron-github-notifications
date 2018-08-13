@@ -1,4 +1,4 @@
-import { sortByName, sortByDate } from '../helpers';
+import { sortByName, sortByUpdate } from '../helpers';
 import { onLoadingStart, onLoadingCompleted } from './loading';
 
 const octokit = require('@octokit/rest')();
@@ -39,16 +39,23 @@ export const retrieveRepositories = () => (dispatch, getState) => {
   });
 };
 
-export const retrieveNotifications = (repo, owner) => (dispatch, getState) => {
+export const retrieveNotifications = () => (dispatch, getState) => {
   authentificateUser(getState());
   dispatch(onLoadingStart());
-  const opts = { repo, owner, per_page: 100 };
-  octokit.activity.getNotificationsForUser(opts).then(({ data, status }) => {
+  const { subscriptions } = getState();
+  const promises = subscriptions
+    .map(o => ({ repo: o.name, owner: o.owner, per_page: 100 }))
+    .map(o => octokit.activity.getNotificationsForUser(o));
+  Promise.all(promises).then(results => {
+    // const failed = results.filter(o => o.status !== 200);
     // FIXME -> loading error
-    if (status !== 200) return;
+    const successed = results
+      .filter(o => o.status === 200)
+      .reduce((acc, o) => acc.concat(o.data), []);
+    const sorted = sortByUpdate(successed);
     dispatch(onLoadingCompleted());
     dispatch({
-      items: sortByDate(data),
+      items: sorted,
       type: 'ON_NOTIFICATIONS_LOADED',
     });
   });
