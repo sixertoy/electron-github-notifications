@@ -41,9 +41,10 @@
     "stylelint-scss": "3.2.0"
   },
   "scripts": {
+    "dev": "nf start --env .env --port 3000",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "precommit": "sh ./.scripts/hooks/precommit.sh",
-    "sass": "./node_modules/.bin/node-sass -w -r src/scss/index.scss src/index.css --output-style compressed"
+    "sass": "$(yarn bin)/node-sass -w -r src/scss/index.scss src/index.css --output-style compressed"
   }
 }

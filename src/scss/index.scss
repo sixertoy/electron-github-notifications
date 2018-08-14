@@ -1,3 +1,5 @@
+@import './core/index';
+
 * {
   box-sizing: border-box;
 }
@@ -13,6 +15,12 @@ body {
   padding: 0;
   font-family: sans-serif;
   background-color: #F1F1F1;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
 }
 
 .flex-columns {
@@ -56,4 +64,10 @@ body {
 
 .notification .name.pullrequest {
   background-color: #FF6E5F;
+}
+
+#root,
+#app-container {
+  height: 100%;
+  max-height: 100vh;
 }

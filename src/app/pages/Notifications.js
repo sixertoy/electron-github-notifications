@@ -1,11 +1,12 @@
 /* eslint
-  camelcase: 0
-*/
+  camelcase: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { datetime } from '../helpers';
+import { retrieveNotifications } from '../actions';
 
 const renderNotification = obj => {
   const {
@@ -31,15 +32,31 @@ const renderNotification = obj => {
   );
 };
 
-const Notifications = ({ notifications }) => (
-  <div>
-    <h2>Notifications</h2>
-    <ul>{notifications && notifications.map(renderNotification)}</ul>
-  </div>
-);
+class NotificationsPage extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    const { dispatch } = props;
+    this.actions = bindActionCreators({ retrieveNotifications }, dispatch);
+  }
 
-Notifications.propTypes = {
+  componentDidMount() {
+    this.actions.retrieveNotifications();
+  }
+
+  render() {
+    const { notifications } = this.props;
+    return (
+      <div id="notifications-container" className="is-overlay">
+        <h2>Notifications</h2>
+        <ul>{notifications && notifications.map(renderNotification)}</ul>
+      </div>
+    );
+  }
+}
+
+NotificationsPage.propTypes = {
   // repositories: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
   notifications: PropTypes.array.isRequired,
 };
 
@@ -48,4 +65,4 @@ const mapStateToProps = ({ notifications, watched }) => ({
   repositories: watched.map(o => o.name),
 });
 
-export default connect(mapStateToProps)(Notifications);
+export default connect(mapStateToProps)(NotificationsPage);

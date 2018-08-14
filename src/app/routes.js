@@ -1,13 +1,13 @@
-import Homepage from './pages/Homepage';
+import Notifications from './pages/Notifications';
 
 export const routes = {
   main: [
     {
       icon: 'home',
-      name: 'Homepage',
-      component: Homepage,
+      name: 'Notification',
+      component: Notifications,
       paths: ['/'],
-      title: 'Homepage',
+      title: 'Notification',
     },
   ],
 };

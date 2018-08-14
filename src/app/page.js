@@ -31,7 +31,7 @@ const buildRoute = route => {
 const getbodyclass = path => `page-${(path && slugify(path)) || 'home'}`;
 
 const PageComponent = ({ version, location }) => (
-  <div id="app-container">
+  <React.Fragment>
     <Helmet>
       <body className={getbodyclass(location.pathname)} />
       <title>
@@ -39,34 +39,28 @@ const PageComponent = ({ version, location }) => (
         {usedebug() ? ' | DEV' : ''} | Backoffice
       </title>
     </Helmet>
-    {/* <AppNavigation routes={routes} path={location.pathname} /> */}
-    <div id="page-container">
-      <div id="application-header" className="rainbow p30">
+    <div id="app-container" className="flex-rows">
+      <div id="application-header" className="flex-0 p30">
         <h1 className="title">
           <span>{Manifest.name}</span>
           <small>{Manifest.description}</small>
         </h1>
-        <div className="user align-right" />
       </div>
-      {/* <AppBreadcrumbs /> */}
-      <div id="application-body">
+      <div id="application-body" className="flex-1 is-relative no-overflow">
         <Switch>
           <Route exact path="/login" component={Login} />
           {routes.main.map(buildRoute)}
           <Route component={NoMatch} />
         </Switch>
       </div>
-      <div id="application-footer"
-        className="flex-columns flex-between p20 mt60">
-        <div className="col-left">
-          <span>{Manifest.copyright}</span>
-        </div>
-        <div className="col-right">
+      {/* <AppNavigation routes={routes} path={location.pathname} /> */}
+      <div id="application-footer" className="flex-0 p20 mt60">
+        <div className="align-right">
           <span>{`v${version}`}</span>
         </div>
       </div>
     </div>
-  </div>
+  </React.Fragment>
 );
 
 PageComponent.defaultProps = {};
