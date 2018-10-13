@@ -1,9 +1,9 @@
 import Types from '../actions/Types';
 
-export const subscriptions = (state = [], action) => {
+export const watched = (state = [], action) => {
   switch (action.type) {
   case Types.ON_REPOSITORY_SUBSCRIBE:
-    return state.concat([action.item]);
+    return [...state, action.id];
   case Types.ON_REPOSITORY_UNSUBSCRIBE:
     return state.filter(o => o.id !== action.id);
   default:
@@ -11,18 +11,9 @@ export const subscriptions = (state = [], action) => {
   }
 };
 
-export const watched = (state = [], action) => {
+export const repositories = (state = [], action) => {
   switch (action.type) {
   case Types.ON_REPOSITORIES_LOADED:
-    return action.items;
-  default:
-    return state;
-  }
-};
-
-export const notifications = (state = [], action) => {
-  switch (action.type) {
-  case Types.ON_NOTIFICATIONS_LOADED:
     return action.items;
   default:
     return state;

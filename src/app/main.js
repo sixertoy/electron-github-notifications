@@ -10,14 +10,14 @@ import { routes } from './routes';
 import { usedebug } from './core/config';
 import { slugify, pagetitle } from './helpers';
 import Login from './pages/Login';
-import NoMatch from './components/routes/NoMatch';
-import PrivateRoute from './components/routes/PrivateRoute';
+import NoMatch from './components/router/NoMatch';
+import PrivateRoute from './components/router/PrivateRoute';
 
 const buildRoute = route => {
   if (!route) return null;
-  const { paths, name, icon, links } = route;
+  const { path, name, icon, links } = route;
   const Component = route.component;
-  return paths.map(path => (
+  return (
     <PrivateRoute exact
       path={path}
       key={slugify(path, 'route')}
@@ -25,7 +25,7 @@ const buildRoute = route => {
         const pageconfig = { name, icon, path, links };
         return <Component config={pageconfig} />;
       }} />
-  ));
+  );
 };
 
 const getbodyclass = path => `page-${(path && slugify(path)) || 'home'}`;
@@ -46,7 +46,7 @@ const Application = ({ version, location }) => (
           <small>{Manifest.description}</small>
         </h1>
       </div>
-      <div id="application-body" className="p30 flex-1 is-relative no-overflow">
+      <div id="application-body" className="p30 flex-1 is-relative">
         <Switch>
           <Route exact path="/login" component={Login} />
           {routes.main.map(buildRoute)}

@@ -1,20 +1,20 @@
 import Settings from './pages/Settings';
-import Notifications from './pages/Notifications';
+import Flux from './pages/Flux';
 
 export const routes = {
   main: [
     {
       icon: 'home',
-      name: 'Notification',
-      component: Notifications,
-      paths: ['/'],
-      title: 'Notification',
+      name: 'Flux',
+      component: Flux,
+      path: '/',
+      title: 'Flux',
     },
     {
       icon: 'gear',
       name: 'Settings',
       component: Settings,
-      paths: ['/settings'],
+      path: '/settings',
       title: 'Settings',
     },
   ],

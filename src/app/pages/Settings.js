@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import { logout } from '../actions';
 import { retrieveUser, retrieveUserRepositories } from '../actions/xhr';
 import User from '../components/User';
-import Repositories from '../components/Repositories';
+import Repositories from '../components/settings/Repositories';
 
 class SettingsPage extends React.PureComponent {
   constructor(props) {

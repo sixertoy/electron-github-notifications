@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #F1F1F1;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+.notification {
+  padding: 12px;
+  border-radius: 2px;
+  margin-bottom: 3px;
+  background-color: #D3D1D3;
+}
+
+.notification .name {
+  border-radius: 4px;
+}
+
+.notification .name.issue {
+  background-color: #42E6C0;
+}
+
+.notification .name.pullrequest {
+  background-color: #FF6E5F;
+}

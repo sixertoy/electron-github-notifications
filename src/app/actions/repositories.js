@@ -1,7 +1,7 @@
 import Types from './Types';
 
-export const subscribe = item => ({
-  item,
+export const subscribe = id => ({
+  id,
   type: Types.ON_REPOSITORY_SUBSCRIBE,
 });
 

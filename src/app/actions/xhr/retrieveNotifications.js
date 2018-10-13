@@ -4,9 +4,9 @@ import { onLoadingStart, onLoadingCompleted } from '../loading';
 import Types from '../Types';
 
 export const retrieveNotifications = () => (dispatch, getState) => {
-  const { subscriptions } = getState();
+  const { repositories } = getState();
   dispatch(onLoadingStart());
-  const promises = subscriptions
+  const promises = repositories
     .map(o => ({ repo: o.name, owner: o.owner, per_page: 100 }))
     .map(o => Client.fetch('activity.getNotificationsForUser', o));
   Promise.all(promises).then(results => {
