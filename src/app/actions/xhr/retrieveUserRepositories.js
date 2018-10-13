@@ -5,9 +5,8 @@ import Types from '../Types';
 
 export const retrieveUserRepositories = () => dispatch => {
   dispatch(onLoadingStart());
-  const opts = {};
-  // const opts = { username: 'sixertoy', per_page: 100 };
-  Client.fetch('users.get', opts)
+  const opts = { username: 'sixertoy', per_page: 100 };
+  Client.fetch('repos.getForUser', opts)
     .then(({ data, status }) => {
       console.log('retrieveUserRepositories', data);
       // FIXME -> loading error

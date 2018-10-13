@@ -18,8 +18,8 @@ PrivateRoute.propTypes = {
   isauthentificated: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({ githubtoken }) => ({
-  isauthentificated: githubtoken !== null,
+const mapStateToProps = ({ token }) => ({
+  isauthentificated: token !== null,
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

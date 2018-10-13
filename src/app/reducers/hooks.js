@@ -4,8 +4,8 @@ import Types from '../actions/Types';
 import OctokitClient from '../core/client';
 
 registerPosthook(Types.ON_LOGIN, appStore => {
-  const { githubtoken } = appStore.getState();
-  OctokitClient.init(githubtoken);
+  const { token } = appStore.getState();
+  OctokitClient.init(token);
 });
 
 registerPosthook(Types.ON_LOGOUT, () => {
@@ -13,7 +13,7 @@ registerPosthook(Types.ON_LOGOUT, () => {
 });
 
 registerPosthook(Types.PERSIST_REHYDRATE, appStore => {
-  const { githubtoken } = appStore.getState();
-  if (!githubtoken) return;
-  OctokitClient.init(githubtoken);
+  const { token } = appStore.getState();
+  if (!token) return;
+  OctokitClient.init(token);
 });

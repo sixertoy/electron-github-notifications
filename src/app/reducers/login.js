@@ -1,6 +1,6 @@
 import Types from '../actions/Types';
 
-export const githubtoken = (state = null, action) => {
+export const token = (state = null, action) => {
   switch (action.type) {
   case Types.ON_LOGIN:
     return action.token;
@@ -11,4 +11,9 @@ export const githubtoken = (state = null, action) => {
   }
 };
 
-export default githubtoken;
+export const user = (state = {}, action) => {
+  switch (action.type) {
+  default:
+    return state;
+  }
+};

@@ -9,7 +9,7 @@ export const usedebug = () => nodenv === 'development';
 export const persistconfig = {
   storage,
   key: 'localhost.github.notifications',
-  whitelist: ['githubtoken', 'subscriptions'],
+  whitelist: ['subscriptions', 'token', 'user'],
 };
 
 Logger.debug(`
