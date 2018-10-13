@@ -1,5 +1,12 @@
 import Types from '../actions/Types';
 
+export const lastchannel = (state = '', action) => {
+  switch (action.type) {
+  default:
+    return state;
+  }
+};
+
 export const channels = (state = [], action) => {
   switch (action.type) {
   case Types.ON_CHANNEL_CREATE:
@@ -10,5 +17,3 @@ export const channels = (state = [], action) => {
     return state;
   }
 };
-
-export default channels;

@@ -1,6 +1,8 @@
 import React from 'react';
+import pick from 'lodash.pick';
 import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 class Sidebar extends React.PureComponent {
   addChannelHandler = () => {};
@@ -8,19 +10,24 @@ class Sidebar extends React.PureComponent {
   changeChannelHandler = () => {};
 
   render() {
-    const { channels } = this.props;
+    const { data } = this.props;
     return (
       <div id="flux-sidebar">
         <nav>
-          {channels &&
-            channels.map(obj => (
-              <button type="button" onClick={this.changeChannelHandler}>
+          {data &&
+            data.map(obj => (
+              <NavLink key={obj.id} to={`/notifications?channel=${obj.id}`}>
                 <span>{obj.name}</span>
-              </button>
+                <img src={obj.icon}
+                  alt=""
+                  width="80"
+                  height="80"
+                  style={{ minWidth: 80, minHeight: 80 }} />
+              </NavLink>
             ))}
-          <button type="button" onClick={this.addChannelHandler}>
+          <NavLink key="add-channel-button" to="/new">
             <span>add</span>
-          </button>
+          </NavLink>
         </nav>
       </div>
     );
@@ -28,11 +35,18 @@ class Sidebar extends React.PureComponent {
 }
 
 Sidebar.defaultProps = {
-  channels: [],
+  data: [],
 };
 
 Sidebar.propTypes = {
-  channels: PropTypes.array,
+  data: PropTypes.array,
 };
 
-export default Sidebar;
+const mapStateToProps = ({ channels }) => {
+  const props = ['name', 'icon', 'id'];
+  console.log('channels', channels);
+  const data = channels.map(o => pick(o, props));
+  return { data };
+};
+
+export default connect(mapStateToProps)(Sidebar);

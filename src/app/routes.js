@@ -7,7 +7,7 @@ export const routes = {
       icon: 'home',
       name: 'Flux',
       component: Flux,
-      path: '/',
+      path: '/:view(new|notifications)?',
       title: 'Flux',
     },
     {

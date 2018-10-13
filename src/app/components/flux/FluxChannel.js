@@ -1,10 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 
-const FluxChannel = ({ channel }) => <div id="flux-cannel">{channel}</div>;
+const FluxChannel = () => <div id="flux-cannel">toto</div>;
 
-FluxChannel.propTypes = {
-  channel: PropTypes.string.isRequired,
-};
-
-export default FluxChannel;
+export default compose(withRouter)(FluxChannel);

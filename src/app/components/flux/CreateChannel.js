@@ -19,10 +19,10 @@ class FluxChannelCreate extends React.PureComponent {
   }
 
   submitHandler = values => {
-    const name = 'channel-name';
-    const slugified = slugify(name);
-    const icon = `https://github.com/identicons/${slugified}.png`;
-    this.actions.createChannel({ icon, ...values });
+    let slug = slugify(values.name);
+    slug = slug.toLowerCase();
+    const icon = `https://identicons.github.com/${slug}.png`;
+    this.actions.createChannel({ icon, slug, ...values });
   };
 
   renderNameInput = ({ input, meta }) => (
