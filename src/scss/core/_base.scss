@@ -11,11 +11,12 @@ body {
   padding: 0;
   width: 100%;
   min-width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 body {
   color: #000000;
+  font-size: 16px;
   font-family: Helvetica, Arial, Verdana, sans-serif;
 }
 
@@ -26,7 +27,7 @@ li {
   list-style-type: none;
 }
 
-li ~ li {
+li + li {
   margin-top: 12px;
 }
 
@@ -49,6 +50,7 @@ pre {
 .disabled,
 :disabled,
 :disabled:hover,
+:disabled:active,
 :disabled:visited {
   cursor: not-allowed;
   box-shadow: inherit;
@@ -61,34 +63,6 @@ pre {
  CLASSES
 
 ------------------------------------------------------ */
-
-.clearfix {
-  *zoom: 1;
-}
-
-.clearfix::after,
-.clearfix::before {
-  width: 0;
-  height: 0;
-  content: '.';
-  font-size: 0;
-  line-height: 0;
-  display: block;
-  overflow: hidden;
-  visibility: hidden;
-}
-
-.clearfix::after {
-  clear: both;
-}
-
-.float-left {
-  float: left;
-}
-
-.float-right {
-  float: right;
-}
 
 .is-overlay,
 .is-absolute {
@@ -122,40 +96,8 @@ pre {
   overflow-y: scroll !important;
 }
 
-.hidden,
-.is-invisible {
-  display: none;
-  visibility: hidden;
-}
-
-.visible,
-.is-visible {
-  display: inherit;
-  visibility: inherit;
-}
-
 .cover {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
-
-/* --------------------------------------------
-
- TEXT Alignments
-
--------------------------------------------- */
-.align-left,
-.has-text-left-aligned {
-  text-align: left;
-}
-
-.align-right,
-.has-text-right-aligned {
-  text-align: right;
-}
-
-.align-center,
-.has-text-centered {
-  text-align: center;
 }

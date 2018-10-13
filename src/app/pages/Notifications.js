@@ -4,9 +4,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Redirect } from 'react-router-dom';
 
 import { datetime } from '../helpers';
-import { retrieveNotifications } from '../actions';
+import { retrieveNotifications } from '../actions/xhr';
+import Repositories from '../components/Repositories';
 
 const renderNotification = obj => {
   const {
@@ -36,7 +38,8 @@ class NotificationsPage extends React.PureComponent {
   constructor(props) {
     super(props);
     const { dispatch } = props;
-    this.actions = bindActionCreators({ retrieveNotifications }, dispatch);
+    const actions = { retrieveNotifications };
+    this.actions = bindActionCreators(actions, dispatch);
   }
 
   componentDidMount() {
@@ -44,11 +47,16 @@ class NotificationsPage extends React.PureComponent {
   }
 
   render() {
-    const { notifications } = this.props;
+    const { notifications, subscriptions } = this.props;
+    // si aucun abonnement à un repository
+    // on retourne sur la vue settings
+    if (!subscriptions || !subscriptions.length)
+      return <Redirect to="/settings" />;
     return (
-      <div id="notifications-container" className="is-overlay">
+      <div id="notifications-container" className="">
         <h2>Notifications</h2>
         <ul>{notifications && notifications.map(renderNotification)}</ul>
+        <Repositories />
       </div>
     );
   }
@@ -57,11 +65,13 @@ class NotificationsPage extends React.PureComponent {
 NotificationsPage.propTypes = {
   // repositories: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
+  subscriptions: PropTypes.array.isRequired,
   notifications: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = ({ notifications, watched }) => ({
+const mapStateToProps = ({ notifications, subscriptions, watched }) => ({
   notifications,
+  subscriptions,
   repositories: watched.map(o => o.name),
 });
 

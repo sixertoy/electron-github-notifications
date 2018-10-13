@@ -1,0 +1,47 @@
+/* -------------------------------------------------
+
+ NEGATES
+
+------------------------------------------------- */
+.no-flex {
+  flex: none;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.no-border {
+  border: 0;
+}
+
+.no-background {
+  background-color: transparent;
+}
+
+.no-outline {
+  outline: none;
+}
+
+.no-pointer {
+  cursor: default;
+}
+
+.no-select {
+  user-select: none;
+}
+
+a.no-decoration,
+a.no-decoration:hover,
+a.no-decoration:active,
+a.no-decoration:visited {
+  text-decoration: none;
+}
+
+.no-no-background {
+  background: none !important;
+}

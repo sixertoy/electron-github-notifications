@@ -1,7 +1,9 @@
+import Types from './Types';
+
 export const onLoadingStart = () => ({
-  type: 'ON_LOADING_START',
+  type: Types.ON_LOADING_START,
 });
 
 export const onLoadingCompleted = () => ({
-  type: 'ON_LOADING_COMPLETED',
+  type: Types.ON_LOADING_COMPLETED,
 });

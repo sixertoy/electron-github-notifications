@@ -1,9 +1,11 @@
+import Types from '../actions/Types';
+
 export const loading = (state = false, action) => {
   switch (action.type) {
-  case 'ON_LOADING_START':
+  case Types.ON_LOADING_START:
     return true;
-  case 'ON_LOADING_ERROR':
-  case 'ON_LOADING_COMPLETED':
+  case Types.ON_LOADING_ERROR:
+  case Types.ON_LOADING_COMPLETED:
     return false;
   default:
     return state;

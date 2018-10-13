@@ -30,7 +30,7 @@ const buildRoute = route => {
 
 const getbodyclass = path => `page-${(path && slugify(path)) || 'home'}`;
 
-const PageComponent = ({ version, location }) => (
+const Application = ({ version, location }) => (
   <React.Fragment>
     <Helmet>
       <body className={getbodyclass(location.pathname)} />
@@ -46,7 +46,7 @@ const PageComponent = ({ version, location }) => (
           <small>{Manifest.description}</small>
         </h1>
       </div>
-      <div id="application-body" className="flex-1 is-relative no-overflow">
+      <div id="application-body" className="p30 flex-1 is-relative no-overflow">
         <Switch>
           <Route exact path="/login" component={Login} />
           {routes.main.map(buildRoute)}
@@ -54,7 +54,7 @@ const PageComponent = ({ version, location }) => (
         </Switch>
       </div>
       {/* <AppNavigation routes={routes} path={location.pathname} /> */}
-      <div id="application-footer" className="flex-0 p20 mt60">
+      <div id="application-footer" className="flex-0 p30 mt60">
         <div className="align-right">
           <span>{`v${version}`}</span>
         </div>
@@ -63,13 +63,13 @@ const PageComponent = ({ version, location }) => (
   </React.Fragment>
 );
 
-PageComponent.defaultProps = {};
+Application.defaultProps = {};
 
-PageComponent.propTypes = {
+Application.propTypes = {
   version: PropTypes.string.isRequired,
   location: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = ({ minimized }) => ({ minimized });
 
-export default withRouter(connect(mapStateToProps)(PageComponent));
+export default withRouter(connect(mapStateToProps)(Application));

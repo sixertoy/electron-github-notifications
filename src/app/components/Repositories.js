@@ -83,6 +83,7 @@ Repositories.propTypes = {
 
 const mapStateToProps = ({ watched, subscriptions }) => {
   const parsed = subscriptions.map(o => o.id);
+  console.log('parsed', parsed);
   return {
     watched,
     subscriptions: parsed,

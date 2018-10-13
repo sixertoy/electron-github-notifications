@@ -2,7 +2,7 @@ table {
   width: 100%;
   max-width: 100%;
   min-width: 100%;
-  font-size: 12px;
+  font-size: font-size-to-rem(12px);
   overflow: scroll;
   text-align: left;
   border-spacing: 0;
@@ -16,8 +16,9 @@ th {
 
 th,
 td {
+  @include rem(padding, 12px 15px);
+
   overflow: hidden;
-  padding: 12px 15px;
   display: table-cell;
   white-space: nowrap;
   text-overflow: ellipsis;

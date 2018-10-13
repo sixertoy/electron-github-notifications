@@ -1,16 +1,9 @@
 import { combineReducers } from 'redux';
 
 import { loading } from './loading';
+import { githubtoken } from './login';
 import { watched, notifications, subscriptions } from './repositories';
-
-const githubtoken = (state = null, action) => {
-  switch (action.type) {
-  case 'ON_STORE_GITHUB_TOKEN':
-    return action.token;
-  default:
-    return state;
-  }
-};
+import './hooks';
 
 export default combineReducers({
   loading,

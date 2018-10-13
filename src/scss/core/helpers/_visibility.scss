@@ -1,0 +1,11 @@
+.hidden,
+.is-invisible {
+  display: none;
+  visibility: hidden;
+}
+
+.visible,
+.is-visible {
+  display: inherit;
+  visibility: inherit;
+}
