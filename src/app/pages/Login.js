@@ -6,6 +6,7 @@ import { Form, Field } from 'react-final-form';
 
 import { login } from '../actions';
 import { retrieveUser } from '../actions/xhr';
+import Client from '../core/client';
 
 const renderTokenField = input => (
   <label htmlFor="token">
@@ -22,8 +23,15 @@ class Login extends React.PureComponent {
     this.actions = bindActionCreators(actions, dispatch);
   }
 
+  componentDidMount() {
+    const { history, token } = this.props;
+    if (!token) return;
+    history.replace('/');
+  }
+
   onSubmitForm = ({ token }) => {
     const { history } = this.props;
+    Client.init(token);
     this.actions.login(token);
     this.actions.retrieveUser();
     history.push('/');
@@ -52,9 +60,16 @@ class Login extends React.PureComponent {
   }
 }
 
+Login.defaultProps = {
+  token: null,
+};
+
 Login.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  token: PropTypes.string,
 };
 
-export default connect()(Login);
+const mapStateToProps = ({ token }) => ({ token });
+
+export default connect(mapStateToProps)(Login);

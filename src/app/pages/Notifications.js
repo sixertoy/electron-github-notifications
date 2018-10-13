@@ -65,14 +65,14 @@ class NotificationsPage extends React.PureComponent {
 NotificationsPage.propTypes = {
   // repositories: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
-  subscriptions: PropTypes.array.isRequired,
   notifications: PropTypes.array.isRequired,
+  subscriptions: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = ({ notifications, subscriptions, watched }) => ({
   notifications,
-  subscriptions,
   repositories: watched.map(o => o.name),
+  subscriptions,
 });
 
 export default connect(mapStateToProps)(NotificationsPage);

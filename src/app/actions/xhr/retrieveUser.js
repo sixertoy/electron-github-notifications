@@ -1,16 +1,20 @@
+import Types from '../Types';
 import Client from '../../core/client';
 import { onLoadingStart, onLoadingCompleted } from '../loading';
-// import Types from '../Types';
+
+const onUserLoaded = user => ({
+  user,
+  type: Types.ON_USER_LOADED,
+});
 
 export const retrieveUser = () => dispatch => {
   dispatch(onLoadingStart());
-  Client.fetch('user.get')
+  Client.fetch('users.get')
     .then(({ data, status }) => {
-      console.log('data', data);
-      // FIXME -> loading error
-      if (status !== 200) return;
+      dispatch(onUserLoaded(data));
       dispatch(onLoadingCompleted());
-      // dispatch({ items, type: Types.ON_REPOSITORIES_LOADED });
+      if (status !== 200) return;
+      console.log('data', data);
     })
     .catch(err => console.log('err -> ', err));
 };

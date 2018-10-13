@@ -4,8 +4,8 @@ import { onLoadingStart, onLoadingCompleted } from '../loading';
 import Types from '../Types';
 
 export const retrieveNotifications = () => (dispatch, getState) => {
-  dispatch(onLoadingStart());
   const { subscriptions } = getState();
+  dispatch(onLoadingStart());
   const promises = subscriptions
     .map(o => ({ repo: o.name, owner: o.owner, per_page: 100 }))
     .map(o => Client.fetch('activity.getNotificationsForUser', o));

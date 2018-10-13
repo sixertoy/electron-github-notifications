@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
+import './hooks';
 import { loading } from './loading';
 import { token, user } from './login';
 import { watched, notifications, subscriptions } from './repositories';
-import './hooks';
 
 export default combineReducers({
   loading,

@@ -6,18 +6,20 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { logout } from '../actions';
-import { retrieveUserRepositories } from '../actions/xhr';
+import { retrieveUser, retrieveUserRepositories } from '../actions/xhr';
+import User from '../components/User';
 import Repositories from '../components/Repositories';
 
 class SettingsPage extends React.PureComponent {
   constructor(props) {
     super(props);
     const { dispatch } = props;
-    const actions = { logout, retrieveUserRepositories };
+    const actions = { logout, retrieveUser, retrieveUserRepositories };
     this.actions = bindActionCreators(actions, dispatch);
   }
 
   componentDidMount() {
+    this.actions.retrieveUser();
     this.actions.retrieveUserRepositories();
   }
 
@@ -34,6 +36,7 @@ class SettingsPage extends React.PureComponent {
             <span>logout</span>
           </button>
         </div>
+        <User />
         <Repositories />
       </div>
     );
@@ -45,9 +48,10 @@ SettingsPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ notifications, watched }) => ({
+const mapStateToProps = ({ notifications, user, watched }) => ({
   notifications,
   repositories: watched.map(o => o.name),
+  user,
 });
 
 export default connect(mapStateToProps)(SettingsPage);

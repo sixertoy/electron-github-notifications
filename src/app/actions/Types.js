@@ -1,6 +1,7 @@
 const keys = [
   'ON_LOGIN',
   'ON_LOGOUT',
+  'ON_USER_LOADED',
   'ON_LOADING_START',
   'ON_LOADING_ERROR',
   'ON_LOADING_COMPLETED',
