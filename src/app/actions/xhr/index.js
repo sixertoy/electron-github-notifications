@@ -1,3 +1,4 @@
+export * from './retrieveChannelflux';
 export * from './retrieveNotifications';
 export * from './retrieveReposCommits';
 export * from './retrieveUser';

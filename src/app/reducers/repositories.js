@@ -14,7 +14,7 @@ export const watched = (state = [], action) => {
 export const repositories = (state = [], action) => {
   switch (action.type) {
   case Types.ON_REPOSITORIES_LOADED:
-    return action.items;
+    return action.payload.slice(0);
   default:
     return state;
   }

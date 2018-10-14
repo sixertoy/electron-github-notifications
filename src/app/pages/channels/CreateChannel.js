@@ -9,13 +9,19 @@ import { bindActionCreators, compose } from 'redux';
 import { Link, withRouter } from 'react-router-dom';
 
 import { createChannel } from '../../actions';
+import { retrieveUserRepositories } from '../../actions/xhr';
+import Loader from '../../components/Loader';
 
-class FluxChannelCreate extends React.PureComponent {
+class CreateChannel extends React.PureComponent {
   constructor(props) {
     super(props);
     const { dispatch } = this.props;
-    const actions = { createChannel };
+    const actions = { createChannel, retrieveUserRepositories };
     this.actions = bindActionCreators(actions, dispatch);
+  }
+
+  componentDidMount() {
+    this.actions.retrieveUserRepositories();
   }
 
   submitHandler = values => {
@@ -43,16 +49,19 @@ class FluxChannelCreate extends React.PureComponent {
   );
 
   render() {
-    const { initialValues, selected } = this.props;
+    const { initialValues, loading, selected } = this.props;
     const hasWatched = selected && selected.length > 0;
     return (
       <div id="flux-channel-create">
-        {!hasWatched && (
+        {loading && <Loader />}
+        {!loading &&
+          !hasWatched && (
           <Link to="/settings">
             <span>Add some repositories to watch</span>
           </Link>
         )}
-        {hasWatched && (
+        {!loading &&
+          hasWatched && (
           <Form onSubmit={this.submitHandler}
             initialValues={initialValues}
             render={({ handleSubmit, pristine, invalid }) => (
@@ -83,20 +92,21 @@ class FluxChannelCreate extends React.PureComponent {
   }
 }
 
-FluxChannelCreate.propTypes = {
+CreateChannel.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   initialValues: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
   selected: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = ({ repositories, watched }) => {
+const mapStateToProps = ({ loading, repositories, watched }) => {
   const selected = repositories.filter(obj => watched.includes(obj.id));
   const initialValues = { name: sillyname(), id: uuid() };
-  return { initialValues, selected };
+  return { initialValues, loading, selected };
 };
 
 export default compose(
   withRouter,
   connect(mapStateToProps)
-)(FluxChannelCreate);
+)(CreateChannel);

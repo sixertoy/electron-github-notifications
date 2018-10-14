@@ -4,31 +4,33 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators, compose } from 'redux';
 
-import { retrieveReposCommits } from '../../actions/xhr';
+import { retrieveFlux } from '../../actions';
+import { retrieveUserRepositories } from '../../actions/xhr';
 import Loader from '../../components/Loader';
 
 class ChannelFlux extends React.PureComponent {
   constructor(props) {
     super(props);
     const { dispatch } = this.props;
-    const actions = { retrieveReposCommits };
+    const actions = { retrieveFlux, retrieveUserRepositories };
     this.actions = bindActionCreators(actions, dispatch);
   }
 
-  componentDidUpdate() {
-    const { loading } = this.props;
-    if (loading) return;
-    this.requestData();
+  componentDidMount() {
+    const { repositories } = this.props;
+    const hasRepositories = repositories && repositories.length > 0;
+    if (hasRepositories) return;
+    this.actions.retrieveUserRepositories();
   }
 
-  requestData = () => {
-    const { subscribed } = this.props;
-    const queries = subscribed.map(obj => {
-      const { name, owner } = obj;
-      return { owner: owner.login, repo: name };
-    });
-    this.actions.retrieveReposCommits(queries);
-  };
+  componentDidUpdate(prevProps) {
+    const { channelid, loading, repositories } = this.props;
+    const hasSameRepositories = repositories === prevProps.repositories;
+    const hasSameChannelId = channelid === prevProps.channelid;
+    const shouldRequest = !hasSameRepositories || !hasSameChannelId;
+    if (loading || !shouldRequest) return;
+    this.actions.retrieveFlux(channelid);
+  }
 
   render() {
     const { loading } = this.props;
@@ -42,20 +44,21 @@ class ChannelFlux extends React.PureComponent {
 }
 
 ChannelFlux.propTypes = {
+  channelid: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  subscribed: PropTypes.array.isRequired,
+  // notifications: PropTypes.array.isRequired,
+  repositories: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = ({ channels, loading, repositories }, { match }) => {
+const mapStateToProps = ({ loading, repositories }, { match }) => {
   const { id } = match.params;
-  const channel = channels.find(o => o.id === id);
-  const subscribed = repositories.filter(o =>
-    channel.repositories.includes(o.id)
-  );
+  const notifications = [];
   return {
+    channelid: id,
     loading,
-    subscribed,
+    notifications,
+    repositories,
   };
 };
 
