@@ -6,9 +6,9 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 
 import { retrieveUserRepositories } from '../actions/xhr';
 import Loader from '../components/Loader';
-import ChannelFlux from '../components/channels/ChannelFlux';
-import ChannelsSidebar from '../components/channels/ChannelsSidebar';
-import CreateChannel from '../components/channels/CreateChannel';
+import ChannelFlux from './channels/ChannelFlux';
+import ChannelsSidebar from './channels/ChannelsSidebar';
+import CreateChannel from './channels/CreateChannel';
 
 class ChannelPage extends React.PureComponent {
   constructor(props) {

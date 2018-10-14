@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 // application
-import { usedebug } from './app/core/config';
-import { slugify, pagetitle } from './app/helpers';
-import Routes from './routes';
-import Manifest from './manifest';
-import Login from './app/pages/Login';
-import Navigation from './app/components/Navigation';
-import NoMatch from './app/components/router/NoMatch';
-import PrivateRoute from './app/components/router/PrivateRoute';
+import { usedebug } from '../core/config';
+import { slugify, pagetitle } from '../helpers';
+import Routes from '../../routes';
+import Login from '../pages/Login';
+import Header from './Header';
+import Navigation from './Navigation';
+import NoMatch from './router/NoMatch';
+import PrivateRoute from './router/PrivateRoute';
 
 const buildRoute = route => {
   if (!route) return null;
@@ -31,7 +31,7 @@ const buildRoute = route => {
 
 const getbodyclass = path => `page-${(path && slugify(path)) || 'home'}`;
 
-const Application = ({ version, location }) => (
+const Application = ({ location }) => (
   <React.Fragment>
     <Helmet>
       <body className={getbodyclass(location.pathname)} />
@@ -41,11 +41,8 @@ const Application = ({ version, location }) => (
       </title>
     </Helmet>
     <div id="app-container" className="flex-rows">
-      <div id="application-header" className="flex-0 p30">
-        <h1 className="title">
-          <span>{Manifest.name}</span>
-          <small>{Manifest.description}</small>
-        </h1>
+      <div id="application-header" className="flex-0">
+        <Header />
       </div>
       <div id="application-body" className="flex-1 is-relative">
         <Switch>
@@ -54,11 +51,8 @@ const Application = ({ version, location }) => (
           <Route component={NoMatch} />
         </Switch>
       </div>
-      <Navigation />
-      <div id="application-footer" className="flex-0 p30 mt60">
-        <div className="align-right">
-          <span>{`v${version}`}</span>
-        </div>
+      <div id="application-footer" className="flex-0 mt60">
+        <Navigation />
       </div>
     </div>
   </React.Fragment>
@@ -67,7 +61,6 @@ const Application = ({ version, location }) => (
 Application.defaultProps = {};
 
 Application.propTypes = {
-  version: PropTypes.string.isRequired,
   location: PropTypes.object.isRequired,
 };
 

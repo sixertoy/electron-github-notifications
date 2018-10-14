@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators, compose } from 'redux';
 
 import { retrieveReposCommits } from '../../actions/xhr';
-import Loader from '../Loader';
+import Loader from '../../components/Loader';
 
 class ChannelFlux extends React.PureComponent {
   constructor(props) {
@@ -31,7 +31,7 @@ class ChannelFlux extends React.PureComponent {
   };
 
   render() {
-    const { loading, subscribed } = this.props;
+    const { loading } = this.props;
     return (
       <div id="flux-cannel">
         {loading && <Loader />}
@@ -53,7 +53,6 @@ const mapStateToProps = ({ channels, loading, repositories }, { match }) => {
   const subscribed = repositories.filter(o =>
     channel.repositories.includes(o.id)
   );
-  console.log('subscribed', subscribed);
   return {
     loading,
     subscribed,

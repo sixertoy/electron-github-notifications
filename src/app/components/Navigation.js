@@ -8,7 +8,7 @@ const Navigation = () => {
   const routes = Routes.main;
   const len = routes.length;
   return (
-    <nav id="main-navigation" className="flex-0 flex-columns">
+    <nav id="main-navigation" className="flex-columns">
       {routes.map(obj => {
         const { icon, name, path } = obj;
         const linkto = locationToArray(path).shift() || '';
