@@ -1,6 +1,8 @@
+@import './mixins/index.scss';
+@import './helpers/index.scss';
 @import './_base.scss';
-@import './_text.scss';
-@import './_form.scss';
-@import './_table.scss';
-@import './_popins.scss';
 @import './_borders.scss';
+@import './_form.scss';
+@import './_popins.scss';
+@import './_table.scss';
+@import './_text.scss';

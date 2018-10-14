@@ -6,12 +6,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 // application
 import './index.css';
-import 'antd/dist/antd.css';
 import { configure } from './app/core/store';
 import { appversion, usedebug } from './app/core/config';
 
 // components
-import Application from './app/main';
+import Application from './main';
 
 const { store, persistor } = configure();
 

@@ -1,10 +1,8 @@
-.hidden,
-.is-invisible {
+.is-hidden {
   display: none;
   visibility: hidden;
 }
 
-.visible,
 .is-visible {
   display: inherit;
   visibility: inherit;

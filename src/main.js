@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 // application
+import { usedebug } from './app/core/config';
+import { slugify, pagetitle } from './app/helpers';
+import Routes from './routes';
 import Manifest from './manifest';
-import { routes } from './routes';
-import { usedebug } from './core/config';
-import { slugify, pagetitle } from './helpers';
-import Login from './pages/Login';
-import NoMatch from './components/router/NoMatch';
-import PrivateRoute from './components/router/PrivateRoute';
+import Login from './app/pages/Login';
+import Navigation from './app/components/Navigation';
+import NoMatch from './app/components/router/NoMatch';
+import PrivateRoute from './app/components/router/PrivateRoute';
 
 const buildRoute = route => {
   if (!route) return null;
@@ -35,7 +36,7 @@ const Application = ({ version, location }) => (
     <Helmet>
       <body className={getbodyclass(location.pathname)} />
       <title>
-        {pagetitle(routes.main, location.pathname)}
+        {pagetitle(Routes.main, location.pathname)}
         {usedebug() ? ' | DEV' : ''} | Backoffice
       </title>
     </Helmet>
@@ -49,11 +50,11 @@ const Application = ({ version, location }) => (
       <div id="application-body" className="p30 flex-1 is-relative">
         <Switch>
           <Route exact path="/login" component={Login} />
-          {routes.main.map(buildRoute)}
+          {Routes.main.map(buildRoute)}
           <Route component={NoMatch} />
         </Switch>
       </div>
-      {/* <AppNavigation routes={routes} path={location.pathname} /> */}
+      <Navigation />
       <div id="application-footer" className="flex-0 p30 mt60">
         <div className="align-right">
           <span>{`v${version}`}</span>

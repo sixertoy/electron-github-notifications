@@ -4,9 +4,9 @@ import slugify from 'slugify';
 import sillyname from 'sillyname';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
 import { Field, Form } from 'react-final-form';
+import { bindActionCreators, compose } from 'redux';
+import { Link, withRouter } from 'react-router-dom';
 
 import { createChannel } from '../../actions';
 
@@ -19,19 +19,27 @@ class FluxChannelCreate extends React.PureComponent {
   }
 
   submitHandler = values => {
+    const { history } = this.props;
     let slug = slugify(values.name);
     slug = slug.toLowerCase();
-    const icon = `https://identicons.github.com/${slug}.png`;
+    // const icon = `https://identicons.github.com/${slug}.png`;
+    // const icon = `https://identicon-api.herokuapp.com/${slug}/100?format=png`;
+    const icon = `http://identicon.org?t=${slug}&s=100`;
     this.actions.createChannel({ icon, slug, ...values });
+    history.replace(`/channel/${values.id}`);
   };
 
-  renderNameInput = ({ input, meta }) => (
-    <div className="final-form-row">
-      <label htmlFor="name">
-        <input type="text" {...input} />
-        {meta.touched && meta.error && <span>{meta.error}</span>}
-      </label>
-    </div>
+  renderNameInput = () => (
+    <Field name="name"
+      id="name"
+      type="text"
+      render={({ input, meta }) => (
+        <label htmlFor="name">
+          <span className="is-block is-full-width">Channel Name</span>
+          <input {...input} className="is-block is-full-width" />
+          {meta.touched && meta.error && <span>{meta.error}</span>}
+        </label>
+      )} />
   );
 
   render() {
@@ -49,20 +57,24 @@ class FluxChannelCreate extends React.PureComponent {
             initialValues={initialValues}
             render={({ handleSubmit, pristine, invalid }) => (
               <form onSubmit={handleSubmit}>
-                <Field name="name" render={this.renderNameInput} />
-                {selected.map(obj => (
-                  <label key={obj.id} htmlFor={`repo_${obj.id}`}>
-                    <Field id={`repo_${obj.id}`}
-                      value={obj.id}
-                      type="checkbox"
-                      component="input"
-                      name="repositories" />
-                    <span>{obj.name}</span>
-                  </label>
-                ))}
-                <button type="submit" disabled={pristine || invalid}>
-                  <span>Submit</span>
-                </button>
+                <div className="final-form-row">{this.renderNameInput()}</div>
+                <div className="final-form-row">
+                  {selected.map(obj => (
+                    <label key={obj.id} htmlFor={`repo_${obj.id}`}>
+                      <Field id={`repo_${obj.id}`}
+                        value={obj.id}
+                        type="checkbox"
+                        component="input"
+                        name="repositories" />
+                      <span>{obj.name}</span>
+                    </label>
+                  ))}
+                </div>
+                <div className="final-form-row">
+                  <button type="submit" disabled={pristine || invalid}>
+                    <span>Submit</span>
+                  </button>
+                </div>
               </form>
             )} />
         )}
@@ -73,6 +85,7 @@ class FluxChannelCreate extends React.PureComponent {
 
 FluxChannelCreate.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
   initialValues: PropTypes.object.isRequired,
   selected: PropTypes.array.isRequired,
 };
@@ -83,4 +96,7 @@ const mapStateToProps = ({ repositories, watched }) => {
   return { initialValues, selected };
 };
 
-export default connect(mapStateToProps)(FluxChannelCreate);
+export default compose(
+  withRouter,
+  connect(mapStateToProps)
+)(FluxChannelCreate);
