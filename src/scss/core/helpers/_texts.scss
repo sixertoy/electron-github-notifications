@@ -6,18 +6,6 @@
   text-decoration: underline;
 }
 
-.is-bold {
-  font-weight: bold;
-}
-
-.is-normal {
-  font-weight: normal;
-}
-
-.is-light {
-  font-weight: light;
-}
-
 .is-lowercase {
   text-transform: lowercase;
 }
@@ -36,4 +24,71 @@
 
 .text-center {
   text-align: center;
+}
+
+/* ------------------------------------------------
+
+ Helpers:
+ - color
+ - style
+ - align
+
+------------------------------------------------ */
+
+/* ------ ALIGN */
+
+.text-justify {
+  text-align: justify;
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.is-white-text,
+a.is-white-text,
+a.is-white-text:hover {
+  color: $white;
+}
+
+.is-black-text {
+  color: $black;
+}
+
+.is-light {
+  font-weight: 300;
+}
+
+.is-normal {
+  font-weight: 400;
+}
+
+.is-medium {
+  font-weight: 500;
+}
+
+.is-semi-bold {
+  font-weight: 600;
+}
+
+.is-bold {
+  font-weight: 700;
+}
+
+.is-extra-bold {
+  font-weight: 800;
+}
+
+/* ------ STYLE */
+
+.is-underline,
+a.is-underline,
+a:link.is-underline {
+  text-decoration: underline;
+}
+
+.is-capitalized {
+  // capitalize each words first letter
+  text-transform: capitalize;
 }

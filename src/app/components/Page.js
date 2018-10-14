@@ -41,7 +41,7 @@ const Application = ({ location }) => (
       </title>
     </Helmet>
     <div id="app-container" className="flex-rows">
-      <div id="application-header" className="flex-0">
+      <div id="application-header" className="flex-0 p12">
         <Header />
       </div>
       <div id="application-body" className="flex-1 is-relative">
