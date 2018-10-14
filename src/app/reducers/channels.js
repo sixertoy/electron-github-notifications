@@ -1,7 +1,9 @@
 import Types from '../actions/Types';
 
-export const lastchannel = (state = '', action) => {
+export const lastchannel = (state = null, action) => {
   switch (action.type) {
+  case Types.ON_CHANNEL_CHANGE:
+    return action.id;
   default:
     return state;
   }

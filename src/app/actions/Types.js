@@ -1,4 +1,5 @@
 const keys = [
+  'ON_CHANNEL_CHANGE',
   'ON_CHANNEL_CREATE',
   'ON_CHANNEL_REMOVE',
   'ON_LOGIN',

@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux';
 
 import { logout } from '../actions';
 import { retrieveUser, retrieveUserRepositories } from '../actions/xhr';
-import User from '../components/User';
 import Repositories from '../components/settings/Repositories';
 
 class SettingsPage extends React.PureComponent {
@@ -28,16 +27,19 @@ class SettingsPage extends React.PureComponent {
   };
 
   render() {
+    const { user } = this.props;
     return (
-      <div id="settings-container" className="">
-        <h2>Paramètres</h2>
-        <div>
+      <div id="settings" className="flex-rows">
+        <div className="flex-0">
+          <span>{user.login}</span>
+          <span>{user.name}</span>
+        </div>
+        <Repositories />
+        <div className="flex-0">
           <button type="button" onClick={this.logoutHandler}>
             <span>logout</span>
           </button>
         </div>
-        <User />
-        <Repositories />
       </div>
     );
   }
@@ -46,6 +48,7 @@ class SettingsPage extends React.PureComponent {
 SettingsPage.propTypes = {
   // repositories: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = ({ notifications, user, watched }) => ({

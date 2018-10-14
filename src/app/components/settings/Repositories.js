@@ -45,16 +45,14 @@ class Repositories extends React.PureComponent {
     if (!ischecked && filtering === 'checked') return null;
     if (ischecked && filtering === 'unchecked') return null;
     return (
-      <li key={id}>
-        <label htmlFor={`repos_${id}`}>
-          <input type="checkbox"
-            id={id}
-            value={id}
-            checked={ischecked}
-            onChange={this.onCheckboxChange} />
-          <span>{name}</span>
-        </label>
-      </li>
+      <label key={id} htmlFor={`repos_${id}`} className="is-block">
+        <input type="checkbox"
+          id={id}
+          value={id}
+          checked={ischecked}
+          onChange={this.onCheckboxChange} />
+        <span>{name}</span>
+      </label>
     );
   }
 
@@ -62,12 +60,14 @@ class Repositories extends React.PureComponent {
     const { repositories } = this.props;
     const { filtering } = this.state;
     return (
-      <div>
+      <div className="repositories flex-1">
         <h2>Watched Repositories ({filtering})</h2>
         <button type="button" onClick={this.onToggleClick}>
           <span>Show/Hide</span>
         </button>
-        <ul>{repositories && repositories.map(this.renderRepository)}</ul>
+        <div className="">
+          {repositories && repositories.map(this.renderRepository)}
+        </div>
       </div>
     );
   }

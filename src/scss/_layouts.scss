@@ -57,6 +57,9 @@
     @extend .text-center;
 
     width: $item-width;
+    height: $item-width;
+    min-width: $item-width;
+    min-height: $item-width;
     border-radius: 4px;
     background-color: $white;
   }
