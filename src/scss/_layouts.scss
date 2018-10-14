@@ -67,4 +67,9 @@
   .item + .item {
     @extend .mt12;
   }
+
+  .active {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 }

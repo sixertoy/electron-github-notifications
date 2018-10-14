@@ -14,10 +14,12 @@ class ChannelsSidebar extends React.PureComponent {
 
   renderChannelLink = obj => {
     const { id, icon, name } = obj;
+    const destination = `/channel/${id}`;
     return (
       <NavLink key={id}
-        to={`/channel/${id}`}
+        to={destination}
         className="avatar item"
+        activeClassName="active"
         onClick={() => this.channelClickHandler(id)}>
         <img src={icon} alt={name} />
       </NavLink>
