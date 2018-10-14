@@ -7,6 +7,7 @@ import { bindActionCreators, compose } from 'redux';
 import { retrieveFlux } from '../../actions';
 import { retrieveUserRepositories } from '../../actions/xhr';
 import Loader from '../../components/Loader';
+import Notification from '../../components/Notification';
 
 class ChannelFlux extends React.PureComponent {
   constructor(props) {
@@ -33,11 +34,17 @@ class ChannelFlux extends React.PureComponent {
   }
 
   render() {
-    const { loading } = this.props;
+    const { loading, notifications } = this.props;
     return (
-      <div id="flux-cannel">
+      <div id="flux-channel">
         {loading && <Loader />}
-        {!loading && 'toto'}
+        {!loading && (
+          <div className="notifications">
+            {notifications.map(obj => (
+              <Notification key={obj.id} item={obj} />
+            ))}
+          </div>
+        )}
       </div>
     );
   }
@@ -47,13 +54,13 @@ ChannelFlux.propTypes = {
   channelid: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  // notifications: PropTypes.array.isRequired,
+  notifications: PropTypes.array.isRequired,
   repositories: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = ({ loading, repositories }, { match }) => {
+const mapStateToProps = (state, { match }) => {
+  const { loading, notifications, repositories } = state;
   const { id } = match.params;
-  const notifications = [];
   return {
     channelid: id,
     loading,

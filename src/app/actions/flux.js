@@ -1,43 +1,15 @@
-import Client from '../core/client';
-import { pipe, sortByDate } from '../helpers';
+import { sortByDate } from '../helpers';
 import { onLoadingCompleted, onLoadingStart } from './loading';
 import Types from './Types';
+import Client from '../core/client';
+import IssueNormalizer from './normalizers/issues';
+import CommitNormalizer from './normalizers/commits';
 
-const parseCommitsNotifications = items =>
+const parseNotifications = (items, normalizer) =>
   items.reduce((acc, entries) => {
-    // eslint-disable-next-line
-    const parsed = entries.data.map(({ commit, committer, html_url }) => ({
-      title: null,
-      url: html_url,
-      content: commit.message,
-      data: commit.author.date,
-      author: {
-        url: committer.url,
-        name: committer.login,
-        avatar: committer.avatar_url,
-      },
-    }));
+    const parsed = entries.data.map(normalizer);
     return [...acc, ...parsed];
   }, []);
-
-const parseIssuesNotifications = items =>
-  items.reduce((acc, entries) => {
-    const parsed = entries.data.map(obj => ({
-      title: obj.title,
-      url: obj.html_url,
-      content: obj.body,
-      data: obj.updated_at,
-      author: {
-        url: obj.user.url,
-        name: obj.user.login,
-        avatar: obj.user.avatar_url,
-      },
-    }));
-    return [...acc, ...parsed];
-  }, []);
-
-const addNotificationType = type => items =>
-  items.map(obj => ({ ...obj, type }));
 
 export const retrieveFlux = channelid => (dispatch, getState) => {
   const { channels, repositories } = getState();
@@ -61,16 +33,10 @@ export const retrieveFlux = channelid => (dispatch, getState) => {
     .then(([commits, issues]) => {
       // FIXME -> loading error
       // const failed = results.filter(o => o.status !== 200);
-      const parsedIssues = pipe(
-        parseIssuesNotifications,
-        addNotificationType('issue')
-      )(issues);
-      const parsedCommits = pipe(
-        parseCommitsNotifications,
-        addNotificationType('commit')
-      )(commits);
+      const parsedIssues = parseNotifications(issues, IssueNormalizer);
+      const parsedCommits = parseNotifications(commits, CommitNormalizer);
       let payload = [...parsedIssues, ...parsedCommits];
-      payload = sortByDate(payload);
+      payload = sortByDate(payload, false);
       dispatch(onLoadingCompleted());
       dispatch({
         payload,

@@ -44,7 +44,7 @@ const Application = ({ location }) => (
       <div id="application-header" className="flex-0 p12">
         <Header />
       </div>
-      <div id="application-body" className="flex-1 is-relative">
+      <div id="application-body" className="flex-1 is-relative no-overflow">
         <Switch>
           <Route exact path="/login" component={Login} />
           {Routes.main.map(buildRoute)}

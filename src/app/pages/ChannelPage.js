@@ -11,11 +11,11 @@ class ChannelPage extends React.PureComponent {
   render() {
     const { location } = this.props;
     return (
-      <div id="channel-page" className="flex-columns">
-        <div id="channel-sidebar" className="flex-0 flex-rows">
+      <div id="channel-page" className="flex-columns is-full-height">
+        <div id="channel-sidebar" className="flex-0 flex-rows items-center">
           <ChannelsSidebar />
         </div>
-        <div className="flex-1">
+        <div className="flex-1 scroll-y">
           <Switch location={location}>
             <Route exact
               key="add-channel-route"
