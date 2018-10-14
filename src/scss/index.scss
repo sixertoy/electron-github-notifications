@@ -1,10 +1,4 @@
 @import './core/index.scss';
+@import './_colors.scss';
 @import './_base.scss';
 @import './_layouts.scss';
-@import './_flux.scss';
-
-#root,
-#app-container {
-  height: 100%;
-  max-height: 100vh;
-}

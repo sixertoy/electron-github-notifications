@@ -10,7 +10,7 @@ import { configure } from './app/core/store';
 import { appversion, usedebug } from './app/core/config';
 
 // components
-import Application from './main';
+import Application from './Main';
 
 const { store, persistor } = configure();
 

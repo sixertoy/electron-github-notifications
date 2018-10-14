@@ -47,7 +47,7 @@ const Application = ({ version, location }) => (
           <small>{Manifest.description}</small>
         </h1>
       </div>
-      <div id="application-body" className="p30 flex-1 is-relative">
+      <div id="application-body" className="flex-1 is-relative">
         <Switch>
           <Route exact path="/login" component={Login} />
           {Routes.main.map(buildRoute)}

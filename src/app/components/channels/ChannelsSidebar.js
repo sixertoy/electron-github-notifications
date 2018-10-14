@@ -12,13 +12,8 @@ class ChannelsSidebar extends React.PureComponent {
   renderChannelLink = obj => {
     const { id, icon, name } = obj;
     return (
-      <NavLink key={id} to={`/notifications?channel=${id}`}>
-        <span>{name}</span>
-        <img src={icon}
-          alt={name}
-          width="80"
-          height="80"
-          style={{ minWidth: 80, minHeight: 80 }} />
+      <NavLink key={id} to={`/channel/${id}`} className="item">
+        <img src={icon} alt={name} />
       </NavLink>
     );
   };
@@ -26,14 +21,14 @@ class ChannelsSidebar extends React.PureComponent {
   render() {
     const { data } = this.props;
     return (
-      <div id="flux-sidebar" className="flex-rows">
-        <nav>
-          {data && data.map(this.renderChannelLink)}
-          <NavLink key="add-channel-button" to="/channel/create">
-            <span>add</span>
-          </NavLink>
-        </nav>
-      </div>
+      <nav id="channel-sidebar-navigation" className="flex-rows">
+        {data && data.map(this.renderChannelLink)}
+        <NavLink key="add-channel-button"
+          to="/channel/create"
+          className="item last-item">
+          <span>add</span>
+        </NavLink>
+      </nav>
     );
   }
 }

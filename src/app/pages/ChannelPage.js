@@ -26,7 +26,7 @@ class ChannelPage extends React.PureComponent {
     const { loading, location } = this.props;
     return (
       <div id="channel-page" className="flex-columns">
-        <div className="flex-0">
+        <div id="channel-sidebar" className="flex-0 flex-rows">
           <ChannelsSidebar />
         </div>
         {loading && <Loader />}
