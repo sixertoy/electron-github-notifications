@@ -1,19 +1,19 @@
 const normalize = obj =>
   obj && {
-    type: 'commit',
-    id: obj.sha,
-    title: null,
-    url: obj.html_url,
-    content: obj.commit.message,
-    date: obj.commit.author.date,
-    comments: obj.commit.comment_count,
     author:
       (obj.committer && {
-        url: obj.committer.url,
-        name: obj.committer.login,
         avatar: obj.committer.avatar_url,
+        name: obj.committer.login,
+        url: obj.committer.url,
       }) ||
       {},
+    comments: obj.commit.comment_count,
+    content: obj.commit.message,
+    date: obj.commit.author.date,
+    id: obj.sha,
+    title: null,
+    type: 'commit',
+    url: obj.html_url,
   };
 
 export default normalize;

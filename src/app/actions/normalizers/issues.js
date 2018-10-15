@@ -1,16 +1,16 @@
 const normalize = obj => ({
-  type: 'issue',
-  id: obj.id,
-  title: obj.title,
-  url: obj.html_url,
+  author: {
+    avatar: obj.user.avatar_url,
+    name: obj.user.login,
+    url: obj.user.url,
+  },
+  comments: obj.comments,
   content: obj.body,
   date: obj.updated_at,
-  comments: obj.comments,
-  author: {
-    url: obj.user.url,
-    name: obj.user.login,
-    avatar: obj.user.avatar_url,
-  },
+  id: obj.id,
+  title: obj.title,
+  type: 'issue',
+  url: obj.html_url,
 });
 
 export default normalize;
