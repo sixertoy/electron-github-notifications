@@ -39,9 +39,9 @@ class MyRepositories extends React.PureComponent {
   };
 
   renderRepository = obj => {
-    const { filtering } = this.state;
     const { id } = obj;
     const { watched } = this.props;
+    const { filtering } = this.state;
     const ischecked = watched.includes(id);
     if (!ischecked && filtering === 'checked') return null;
     if (ischecked && filtering === 'unchecked') return null;
@@ -63,7 +63,8 @@ class MyRepositories extends React.PureComponent {
   // };
 
   render() {
-    const { loading, repositories } = this.props;
+    const { loading, repositories, watched } = this.props;
+    const count = watched.length;
     const { filtering } = this.state;
     return (
       <div id="settings-my-repositories" className="flex-rows flex-1">
@@ -71,7 +72,9 @@ class MyRepositories extends React.PureComponent {
         {!loading && (
           <React.Fragment>
             <div className="flex-0">
-              <h2>Watched Repositories ({filtering})</h2>
+              <h2>
+                {count} Watched Repositories ({filtering})
+              </h2>
               <button type="button" onClick={this.onToggleClick}>
                 <span>Show/Hide</span>
               </button>

@@ -5,7 +5,7 @@ export const watched = (state = [], action) => {
   case Types.ON_REPOSITORY_SUBSCRIBE:
     return [...state, action.id];
   case Types.ON_REPOSITORY_UNSUBSCRIBE:
-    return state.filter(o => o.id !== action.id);
+    return state.filter(id => id !== action.id);
   default:
     return state;
   }

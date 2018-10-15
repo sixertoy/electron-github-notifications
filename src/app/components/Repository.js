@@ -7,11 +7,11 @@ const Repository = ({ checked, item, onClick }) => {
     <div className="repository">
       <label htmlFor={`repos_${id}`} className="is-block">
         <input
-          id={id}
           value={id}
           type="checkbox"
-          onChange={onClick}
           checked={checked}
+          id={`repos_${id}`}
+          onChange={onClick}
         />
         <span className="ml3">{item.name}</span>
         <span className="ml3">{item.type}</span>

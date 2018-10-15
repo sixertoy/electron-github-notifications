@@ -5,7 +5,7 @@ import sillyname from 'sillyname';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, Form } from 'react-final-form';
-import { bindActionCreators, compose } from 'redux';
+import { compose } from 'redux';
 import { Link, withRouter } from 'react-router-dom';
 
 import { createChannel } from '../../actions';
@@ -13,25 +13,20 @@ import { retrieveRepositories } from '../../actions/xhr';
 import Loader from '../../components/Loader';
 
 class CreateChannel extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    const { dispatch } = this.props;
-    const actions = { createChannel, retrieveRepositories };
-    this.actions = bindActionCreators(actions, dispatch);
-  }
-
   componentDidMount() {
-    this.actions.retrieveUserRepositories();
+    const { dispatch } = this.props;
+    dispatch(retrieveRepositories());
   }
 
   submitHandler = values => {
-    const { history } = this.props;
+    const { dispatch, history } = this.props;
     let slug = slugify(values.name);
     slug = slug.toLowerCase();
     // const icon = `https://identicons.github.com/${slug}.png`;
     // const icon = `https://identicon-api.herokuapp.com/${slug}/100?format=png`;
     const icon = `http://identicon.org?t=${slug}&s=100`;
-    this.actions.createChannel({ icon, slug, ...values });
+    const opts = { icon, slug, ...values };
+    dispatch(createChannel(opts));
     history.replace(`/channel/${values.id}`);
   };
 
