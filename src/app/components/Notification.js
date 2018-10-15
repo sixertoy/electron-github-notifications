@@ -15,10 +15,12 @@ const Notification = ({ item }) => {
           <span className="is-block">{date}</span>
           <span className="is-block">{type}</span>
         </div>
-        <a href={url}
+        <a
+          href={url}
           target="_blank"
           rel="noreferrer noopener"
-          className="is-block is-bold">
+          className="is-block is-bold"
+        >
           <span>{itemTitle}</span>
         </a>
         {itemContent && <p className="is-block is-bold">{itemContent}</p>}

@@ -16,11 +16,13 @@ class ChannelsSidebar extends React.PureComponent {
     const { id, icon, name } = obj;
     const destination = `/channel/${id}`;
     return (
-      <NavLink key={id}
+      <NavLink
+        key={id}
         to={destination}
         className="avatar item"
         activeClassName="active"
-        onClick={() => this.channelClickHandler(id)}>
+        onClick={() => this.channelClickHandler(id)}
+      >
         <img src={icon} alt={name} />
       </NavLink>
     );
@@ -31,9 +33,11 @@ class ChannelsSidebar extends React.PureComponent {
     return (
       <nav id="channel-sidebar-navigation" className="flex-rows">
         {data && data.map(this.renderChannelLink)}
-        <NavLink key="add-channel-button"
+        <NavLink
+          key="add-channel-button"
           to="/channel/create"
-          className="item last-item">
+          className="item last-item"
+        >
           <i className="fs20 icon-plus" />
         </NavLink>
       </nav>

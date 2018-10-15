@@ -13,9 +13,11 @@ const Navigation = () => {
         const { icon, name, path } = obj;
         const linkto = locationToArray(path).shift() || '';
         return (
-          <NavLink to={`/${linkto}`}
+          <NavLink
+            to={`/${linkto}`}
             key={path}
-            className={`text-center is-block col-1of${len}`}>
+            className={`text-center is-block col-1of${len}`}
+          >
             <span>{name}</span>
             <i className={`icon-${icon}`} />
           </NavLink>

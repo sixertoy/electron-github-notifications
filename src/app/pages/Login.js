@@ -39,23 +39,27 @@ class Login extends React.PureComponent {
 
   render() {
     return (
-      <Form onSubmit={this.onSubmitForm}
+      <Form
+        onSubmit={this.onSubmitForm}
         validate={() => []}
         initialValues={{ token: null }}
         render={({ handleSubmit, pristine, invalid }) => (
           <form onSubmit={handleSubmit}>
             <h2>Login</h2>
             <div>
-              <Field type="text"
+              <Field
+                type="text"
                 name="token"
                 placeholder="Github token"
-                render={({ input }) => renderTokenField(input)} />
+                render={({ input }) => renderTokenField(input)}
+              />
             </div>
             <button type="submit" disabled={pristine || invalid}>
               <span>Submit</span>
             </button>
           </form>
-        )} />
+        )}
+      />
     );
   }
 }

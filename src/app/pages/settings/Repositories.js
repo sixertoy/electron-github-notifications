@@ -46,11 +46,13 @@ class Repositories extends React.PureComponent {
     if (ischecked && filtering === 'unchecked') return null;
     return (
       <label key={id} htmlFor={`repos_${id}`} className="is-block">
-        <input type="checkbox"
+        <input
+          type="checkbox"
           id={id}
           value={id}
           checked={ischecked}
-          onChange={this.onCheckboxChange} />
+          onChange={this.onCheckboxChange}
+        />
         <span>{name}</span>
       </label>
     );

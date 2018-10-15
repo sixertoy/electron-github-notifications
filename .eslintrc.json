@@ -17,9 +17,7 @@
     "indent": [2, 2, { "SwitchCase": 0 }],
     "no-underscore-dangle": [2, { "allow": ["_id", "__INSTANCE__"] }],
     "react/jsx-one-expression-per-line": 0,
-    "react/jsx-first-prop-new-line": [2, "never"],
     "react/forbid-prop-types": [2, { "forbid": ["any"] }],
-    "react/jsx-closing-bracket-location": [2, "after-props"],
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx"] }]
   }
 }

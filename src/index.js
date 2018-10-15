@@ -10,7 +10,7 @@ import { configure } from './app/core/store';
 import { appversion, usedebug } from './app/core/config';
 
 // components
-import Page from './app/components/Page';
+import Main from './Main';
 
 const { store, persistor } = configure();
 
@@ -18,7 +18,7 @@ const Root = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
-        <Page version={appversion} debug={usedebug()} />
+        <Main version={appversion} debug={usedebug()} />
       </BrowserRouter>
     </PersistGate>
   </Provider>

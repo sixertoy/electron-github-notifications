@@ -21,20 +21,26 @@ class ChannelPage extends React.PureComponent {
         </div>
         <div className="flex-1 scroll-y">
           <Switch location={location}>
-            <Route exact
+            <Route
+              exact
               key="add-channel-route"
               path="/channel"
               render={() =>
                 lastchannel && <Redirect to={`/channel/${channelid}`} />
-              } />
-            <Route exact
+              }
+            />
+            <Route
+              exact
               key="add-channel-route"
               path="/channel/create"
-              component={CreateChannel} />
-            <Route exact
+              component={CreateChannel}
+            />
+            <Route
+              exact
               key="channel-route"
               path="/channel/:id"
-              component={ChannelFlux} />
+              component={ChannelFlux}
+            />
           </Switch>
         </div>
       </div>

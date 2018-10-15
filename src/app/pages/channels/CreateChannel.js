@@ -36,7 +36,8 @@ class CreateChannel extends React.PureComponent {
   };
 
   renderNameInput = () => (
-    <Field name="name"
+    <Field
+      name="name"
       id="name"
       type="text"
       render={({ input, meta }) => (
@@ -45,7 +46,8 @@ class CreateChannel extends React.PureComponent {
           <input {...input} className="is-block is-full-width" />
           {meta.touched && meta.error && <span>{meta.error}</span>}
         </label>
-      )} />
+      )}
+    />
   );
 
   render() {
@@ -62,7 +64,8 @@ class CreateChannel extends React.PureComponent {
         )}
         {!loading &&
           hasWatched && (
-          <Form onSubmit={this.submitHandler}
+          <Form
+            onSubmit={this.submitHandler}
             initialValues={initialValues}
             render={({ handleSubmit, pristine, invalid }) => (
               <form onSubmit={handleSubmit}>
@@ -70,11 +73,13 @@ class CreateChannel extends React.PureComponent {
                 <div className="final-form-row">
                   {selected.map(obj => (
                     <label key={obj.id} htmlFor={`repo_${obj.id}`}>
-                      <Field id={`repo_${obj.id}`}
+                      <Field
+                        id={`repo_${obj.id}`}
                         value={obj.id}
                         type="checkbox"
                         component="input"
-                        name="repositories" />
+                        name="repositories"
+                      />
                       <span>{obj.name}</span>
                     </label>
                   ))}
@@ -85,7 +90,8 @@ class CreateChannel extends React.PureComponent {
                   </button>
                 </div>
               </form>
-            )} />
+            )}
+          />
         )}
       </div>
     );
