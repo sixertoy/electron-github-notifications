@@ -9,14 +9,14 @@ import { bindActionCreators, compose } from 'redux';
 import { Link, withRouter } from 'react-router-dom';
 
 import { createChannel } from '../../actions';
-import { retrieveUserRepositories } from '../../actions/xhr';
+import { retrieveRepositories } from '../../actions/xhr';
 import Loader from '../../components/Loader';
 
 class CreateChannel extends React.PureComponent {
   constructor(props) {
     super(props);
     const { dispatch } = this.props;
-    const actions = { createChannel, retrieveUserRepositories };
+    const actions = { createChannel, retrieveRepositories };
     this.actions = bindActionCreators(actions, dispatch);
   }
 
@@ -108,7 +108,7 @@ CreateChannel.propTypes = {
 
 const mapStateToProps = ({ loading, repositories, watched }) => {
   const selected = repositories.filter(obj => watched.includes(obj.id));
-  const initialValues = { name: sillyname(), id: uuid() };
+  const initialValues = { id: uuid(), name: sillyname() };
   return { initialValues, loading, selected };
 };
 

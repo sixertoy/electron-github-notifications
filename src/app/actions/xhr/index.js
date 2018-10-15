@@ -1,6 +1,4 @@
 export * from './retrieveChannelflux';
-export * from './retrieveNotifications';
 export * from './retrieveReposCommits';
 export * from './retrieveUser';
-export * from './retrieveUserNotifications';
-export * from './retrieveUserRepositories';
+export * from './retrieveRepositories';

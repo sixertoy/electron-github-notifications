@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators, compose } from 'redux';
 
 import { retrieveFlux } from '../../actions';
-import { retrieveUserRepositories } from '../../actions/xhr';
+import { retrieveRepositories } from '../../actions/xhr';
 import Loader from '../../components/Loader';
 import Notification from '../../components/Notification';
 
@@ -13,7 +13,7 @@ class ChannelFlux extends React.PureComponent {
   constructor(props) {
     super(props);
     const { dispatch } = this.props;
-    const actions = { retrieveFlux, retrieveUserRepositories };
+    const actions = { retrieveFlux, retrieveRepositories };
     this.actions = bindActionCreators(actions, dispatch);
   }
 
