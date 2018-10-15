@@ -15,27 +15,6 @@
   @extend .mt12;
 }
 
-.notifications .item {
-  @extend .p12;
-  @extend .flex-columns;
-}
-
-.notifications .item + .item {
-  @extend .mt12;
-}
-
-.notifications .item .avatar {
-  $avatar-width: 30px;
-
-  @extend .mr7;
-
-  width: $avatar-width;
-  height: $avatar-width;
-  min-width: $avatar-width;
-  min-height: $avatar-width;
-  border-radius: $avatar-width / 2;
-}
-
 #root,
 #app-container {
   height: 100%;

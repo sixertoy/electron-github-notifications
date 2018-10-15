@@ -19,7 +19,7 @@ class ChannelPage extends React.PureComponent {
         <div id="channel-sidebar" className="flex-0 flex-rows items-center">
           <Sidebar />
         </div>
-        <div className="flex-1 scroll-y">
+        <div className="flex-1">
           <Switch location={location}>
             <Route
               exact

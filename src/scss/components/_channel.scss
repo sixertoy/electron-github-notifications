@@ -4,6 +4,35 @@
   max-width: 80px;
 }
 
+#channel-notifications {
+  border-radius: 12px;
+
+  .list {
+    background-color: $white;
+  }
+
+  .list .item {
+    @extend .p12;
+    @extend .flex-columns;
+  }
+
+  .list .item + .item {
+    @extend .mt12;
+  }
+
+  .list .item .avatar {
+    $avatar-width: 30px;
+
+    @extend .mr7;
+
+    width: $avatar-width;
+    height: $avatar-width;
+    min-width: $avatar-width;
+    min-height: $avatar-width;
+    border-radius: $avatar-width / 2;
+  }
+}
+
 #channel-sidebar-navigation {
   $item-width: 35px;
 

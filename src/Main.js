@@ -16,7 +16,7 @@ import PrivateRoute from './app/components/router/PrivateRoute';
 
 const buildRoute = route => {
   if (!route) return null;
-  const { path, name, icon, links } = route;
+  const { path, name } = route;
   const Component = route.component;
   return (
     <PrivateRoute
@@ -24,7 +24,7 @@ const buildRoute = route => {
       path={path}
       key={slugify(path, 'route')}
       render={() => {
-        const pageconfig = { name, icon, path, links };
+        const pageconfig = { name, path };
         return <Component config={pageconfig} />;
       }}
     />
@@ -45,7 +45,6 @@ const Main = ({ location }) => (
     <div id="app-container" className="flex-rows">
       <div id="application-header" className="flex-0 p12">
         <Header />
-        <Navigation />
       </div>
       <div id="application-body" className="flex-1 is-relative no-overflow">
         <Switch>
@@ -53,6 +52,9 @@ const Main = ({ location }) => (
           {Routes.main.map(buildRoute)}
           <Route component={NoMatch} />
         </Switch>
+      </div>
+      <div id="application-footer" className="flex-0 mt12 p12">
+        <Navigation />
       </div>
     </div>
   </React.Fragment>

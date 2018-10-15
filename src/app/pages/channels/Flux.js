@@ -29,10 +29,13 @@ class Flux extends React.PureComponent {
   render() {
     const { loading, notifications } = this.props;
     return (
-      <div id="flux-channel">
+      <div
+        id="channel-notifications"
+        className="mr12 is-full-height no-overflow"
+      >
         {loading && <Loader />}
         {!loading && (
-          <div className="notifications">
+          <div className="list is-full-height scroll-y pb12">
             {notifications.map(obj => (
               <Notification key={obj.id} item={obj} />
             ))}
