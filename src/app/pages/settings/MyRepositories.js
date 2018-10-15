@@ -1,16 +1,13 @@
-/* eslint
-  camelcase: 0
-*/
-import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from 'react';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import { subscribe, unsubscribe } from '../../actions';
 
 const filterstates = ['all', 'checked', 'unchecked'];
 
-class Repositories extends React.PureComponent {
+class MyRepositories extends React.PureComponent {
   constructor(props) {
     super(props);
     const { dispatch } = this.props;
@@ -75,15 +72,15 @@ class Repositories extends React.PureComponent {
   }
 }
 
-Repositories.propTypes = {
+MyRepositories.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  watched: PropTypes.array.isRequired,
   repositories: PropTypes.array.isRequired,
+  watched: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = ({ watched, repositories }) => ({
-  watched,
   repositories,
+  watched,
 });
 
-export default connect(mapStateToProps)(Repositories);
+export default connect(mapStateToProps)(MyRepositories);

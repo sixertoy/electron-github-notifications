@@ -1,5 +1,3 @@
-/* eslint
-  camelcase: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -7,7 +5,8 @@ import { bindActionCreators } from 'redux';
 
 import { logout } from '../actions';
 import { retrieveUser, retrieveUserRepositories } from '../actions/xhr';
-import Repositories from './settings/Repositories';
+import MyProfile from './settings/MyProfile';
+import MyRepositories from './settings/MyRepositories';
 
 class SettingsPage extends React.PureComponent {
   constructor(props) {
@@ -27,14 +26,10 @@ class SettingsPage extends React.PureComponent {
   };
 
   render() {
-    const { user } = this.props;
     return (
-      <div id="settings" className="flex-rows">
-        <div className="flex-0">
-          <span>{user.login}</span>
-          <span>{user.name}</span>
-        </div>
-        <Repositories />
+      <div id="settings" className="p12 is-full-height no-overflow flex-rows">
+        <MyProfile />
+        <MyRepositories />
         <div className="flex-0">
           <button type="button" onClick={this.logoutHandler}>
             <span>logout</span>
@@ -46,15 +41,11 @@ class SettingsPage extends React.PureComponent {
 }
 
 SettingsPage.propTypes = {
-  // repositories: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ notifications, user, watched }) => ({
+const mapStateToProps = ({ notifications }) => ({
   notifications,
-  repositories: watched.map(o => o.name),
-  user,
 });
 
 export default connect(mapStateToProps)(SettingsPage);

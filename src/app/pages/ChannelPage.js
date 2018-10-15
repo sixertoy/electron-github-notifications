@@ -1,8 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 
 import ChannelFlux from './channels/ChannelFlux';
 import ChannelsSidebar from './channels/ChannelsSidebar';
