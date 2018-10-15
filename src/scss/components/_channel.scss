@@ -1,0 +1,31 @@
+#channel-sidebar {
+  width: 80px;
+  min-width: 80px;
+  max-width: 80px;
+}
+
+#channel-sidebar-navigation {
+  $item-width: 35px;
+
+  .item {
+    @extend .p3;
+    @extend .no-overflow;
+    @extend .text-center;
+
+    width: $item-width;
+    height: $item-width;
+    min-width: $item-width;
+    min-height: $item-width;
+    border-radius: 4px;
+    background-color: $white;
+  }
+
+  .item + .item {
+    @extend .mt12;
+  }
+
+  .active {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}

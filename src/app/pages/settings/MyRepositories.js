@@ -42,16 +42,18 @@ class MyRepositories extends React.PureComponent {
     if (!ischecked && filtering === 'checked') return null;
     if (ischecked && filtering === 'unchecked') return null;
     return (
-      <label key={id} htmlFor={`repos_${id}`} className="is-block">
-        <input
-          type="checkbox"
-          id={id}
-          value={id}
-          checked={ischecked}
-          onChange={this.onCheckboxChange}
-        />
-        <span>{name}</span>
-      </label>
+      <div className="item">
+        <label key={id} htmlFor={`repos_${id}`} className="is-block">
+          <input
+            id={id}
+            value={id}
+            type="checkbox"
+            checked={ischecked}
+            onChange={this.onCheckboxChange}
+          />
+          <span className="ml3">{name}</span>
+        </label>
+      </div>
     );
   }
 
@@ -59,15 +61,19 @@ class MyRepositories extends React.PureComponent {
     const { repositories } = this.props;
     const { filtering } = this.state;
     return (
-      <div className="repositories flex-1">
-        <h2>Watched Repositories ({filtering})</h2>
-        <button type="button" onClick={this.onToggleClick}>
-          <span>Show/Hide</span>
-        </button>
-        <div className="">
-          {repositories && repositories.map(this.renderRepository)}
+      <section id="settings-my-repositories" className="flex-rows flex-1">
+        <div className="flex-0">
+          <h2>Watched Repositories ({filtering})</h2>
+          <button type="button" onClick={this.onToggleClick}>
+            <span>Show/Hide</span>
+          </button>
         </div>
-      </div>
+        <div className="flex-1 scroll-y">
+          <div className="repositories no-overflow">
+            {repositories && repositories.map(this.renderRepository)}
+          </div>
+        </div>
+      </section>
     );
   }
 }

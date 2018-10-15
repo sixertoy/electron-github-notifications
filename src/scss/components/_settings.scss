@@ -1,0 +1,5 @@
+#settings-my-repositories {
+  .item + .item {
+    @extend .mt12;
+  }
+}

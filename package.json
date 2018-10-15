@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@octokit/rest": "^15.13.1",
+    "check-node-version": "^3.2.0",
     "final-form": "^4.10.0",
     "history": "^4.7.2",
     "jdenticon": "^2.1.0",
