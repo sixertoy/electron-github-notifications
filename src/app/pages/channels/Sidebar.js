@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 import { changeChannel } from '../../actions';
 
-class ChannelsSidebar extends React.PureComponent {
+class Sidebar extends React.PureComponent {
   channelClickHandler = id => {
     const { dispatch } = this.props;
     dispatch(changeChannel(id));
@@ -38,18 +38,18 @@ class ChannelsSidebar extends React.PureComponent {
           to="/channel/create"
           className="item last-item"
         >
-          <i className="fs20 icon-plus" />
+          <i className="icon-plus" />
         </NavLink>
       </nav>
     );
   }
 }
 
-ChannelsSidebar.defaultProps = {
+Sidebar.defaultProps = {
   data: [],
 };
 
-ChannelsSidebar.propTypes = {
+Sidebar.propTypes = {
   data: PropTypes.array,
   dispatch: PropTypes.func.isRequired,
 };
@@ -60,4 +60,4 @@ const mapStateToProps = ({ channels }) => {
   return { data };
 };
 
-export default connect(mapStateToProps)(ChannelsSidebar);
+export default connect(mapStateToProps)(Sidebar);

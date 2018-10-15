@@ -6,7 +6,7 @@ import Loader from '../../components/Loader';
 import Repository from '../../components/Repository';
 import { subscribe, unsubscribe } from '../../actions';
 import { retrieveRepositories } from '../../actions/xhr';
-// import { selectOrganisations } from '../../selectors';
+import { selectRepositories } from '../../selectors';
 
 const filterstates = ['all', 'checked', 'unchecked'];
 
@@ -107,11 +107,11 @@ MyRepositories.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { loading, repositories, watched } = state;
+  const { loading, watched } = state;
   return {
     loading,
     // organisations: selectOrganisations(state),
-    repositories,
+    repositories: selectRepositories(state),
     watched,
   };
 };

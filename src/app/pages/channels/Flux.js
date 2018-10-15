@@ -2,35 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { bindActionCreators, compose } from 'redux';
+import { compose } from 'redux';
 
 import { retrieveFlux } from '../../actions';
 import { retrieveRepositories } from '../../actions/xhr';
 import Loader from '../../components/Loader';
 import Notification from '../../components/Notification';
 
-class ChannelFlux extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    const { dispatch } = this.props;
-    const actions = { retrieveFlux, retrieveRepositories };
-    this.actions = bindActionCreators(actions, dispatch);
-  }
-
+class Flux extends React.PureComponent {
   componentDidMount() {
-    const { repositories } = this.props;
+    const { dispatch, repositories } = this.props;
     const hasRepositories = repositories && repositories.length > 0;
     if (hasRepositories) return;
-    this.actions.retrieveUserRepositories();
+    dispatch(retrieveRepositories());
   }
 
   componentDidUpdate(prevProps) {
-    const { channelid, loading, repositories } = this.props;
+    const { channelid, dispatch, loading, repositories } = this.props;
     const hasSameRepositories = repositories === prevProps.repositories;
     const hasSameChannelId = channelid === prevProps.channelid;
     const shouldRequest = !hasSameRepositories || !hasSameChannelId;
     if (loading || !shouldRequest) return;
-    this.actions.retrieveFlux(channelid);
+    dispatch(retrieveFlux(channelid));
   }
 
   render() {
@@ -50,7 +43,7 @@ class ChannelFlux extends React.PureComponent {
   }
 }
 
-ChannelFlux.propTypes = {
+Flux.propTypes = {
   channelid: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
@@ -72,4 +65,4 @@ const mapStateToProps = (state, { match }) => {
 export default compose(
   withRouter,
   connect(mapStateToProps)
-)(ChannelFlux);
+)(Flux);

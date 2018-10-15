@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Repository = ({ checked, item, onClick }) => {
-  const { id } = item;
+  const { icon, id, name } = item;
   return (
     <div className="repository">
       <label htmlFor={`repos_${id}`} className="is-block">
@@ -13,8 +13,8 @@ const Repository = ({ checked, item, onClick }) => {
           id={`repos_${id}`}
           onChange={onClick}
         />
-        <span className="ml3">{item.name}</span>
-        <span className="ml3">{item.type}</span>
+        <span className="ml3">{name}</span>
+        {icon && <i className={`icon-${icon}`} />}
       </label>
     </div>
   );

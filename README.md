@@ -1,2 +1,2 @@
-- https://ant.design
-- https://octokit.github.io/rest.js/#api-Activity-getNotificationsForUser
+- [Github Icons](https://octicons.github.com)
+- [Github Octokit Rest API](https://octokit.github.io/rest.js/#api-Activity-getNotificationsForUser)

@@ -163,4 +163,7 @@ $RECYCLE.BIN/
 # Customs
 
 index.css
-fontello
+.fontello.session
+fontello/css
+fontello/font
+!fontello/config.json

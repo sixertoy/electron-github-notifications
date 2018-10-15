@@ -4,8 +4,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 
-import ChannelFlux from './channels/ChannelFlux';
-import ChannelsSidebar from './channels/ChannelsSidebar';
+import Flux from './channels/Flux';
+import Sidebar from './channels/Sidebar';
 import CreateChannel from './channels/CreateChannel';
 
 class ChannelPage extends React.PureComponent {
@@ -17,7 +17,7 @@ class ChannelPage extends React.PureComponent {
     return (
       <div id="channel-page" className="flex-columns is-full-height">
         <div id="channel-sidebar" className="flex-0 flex-rows items-center">
-          <ChannelsSidebar />
+          <Sidebar />
         </div>
         <div className="flex-1 scroll-y">
           <Switch location={location}>
@@ -39,7 +39,7 @@ class ChannelPage extends React.PureComponent {
               exact
               key="channel-route"
               path="/channel/:id"
-              component={ChannelFlux}
+              component={Flux}
             />
           </Switch>
         </div>

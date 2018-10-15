@@ -5,21 +5,21 @@ import SettingsPage from './app/pages/SettingsPage';
 const Routes = {
   main: [
     {
-      icon: 'home',
-      name: 'Home',
       component: HomePage,
+      icon: 'octoface',
+      name: 'Home',
       path: '/',
     },
     {
+      component: ChannelPage,
       icon: 'bell',
       name: 'ChannelPage',
-      component: ChannelPage,
       path: '/channel/:view?',
     },
     {
-      icon: 'cog',
-      name: 'Settings',
       component: SettingsPage,
+      icon: 'gear',
+      name: 'Settings',
       path: '/settings',
     },
   ],

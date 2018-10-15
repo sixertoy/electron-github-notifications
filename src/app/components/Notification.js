@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Notification = ({ item }) => {
-  const { author, content, date, title, type, url } = item;
+  const { author, content, date, icon, title, type, url } = item;
   const itemTitle = title || content;
   const itemContent = (!title && content !== itemTitle && content) || null;
   return (
@@ -13,7 +13,7 @@ const Notification = ({ item }) => {
       <div className="flex-1 content">
         <div className="flex-columns flex-between">
           <span className="is-block">{date}</span>
-          <span className="is-block">{type}</span>
+          {icon && <i className={`icon-${icon}`} />}
         </div>
         <a
           href={url}
