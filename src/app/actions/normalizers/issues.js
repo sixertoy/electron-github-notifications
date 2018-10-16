@@ -1,6 +1,7 @@
-const normalize = obj => {
+const normalize = formatDate => obj => {
   if (!obj) return null;
   const user = obj.user || {};
+  const date = obj.updated_at;
   return {
     author: {
       avatar: user.avatar_url,
@@ -9,7 +10,8 @@ const normalize = obj => {
     },
     comments: obj.comments,
     content: obj.body,
-    date: obj.updated_at,
+    date,
+    humandate: formatDate(date),
     icon: 'bug',
     id: obj.id,
     title: obj.title,

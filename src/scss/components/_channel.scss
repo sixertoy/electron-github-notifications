@@ -11,16 +11,26 @@
     background-color: $white;
   }
 
-  .list .item {
+  .notification {
     @extend .p12;
-    @extend .flex-columns;
   }
 
-  .list .item + .item {
+  .notification + .notification {
     @extend .mt12;
   }
 
-  .list .item .avatar {
+  .notification .badge {
+    @extend .no-overflow;
+    @extend .text-center;
+
+    @include radius(30px);
+    @include sizeto(30px);
+
+    color: $white;
+    background-color: $black;
+  }
+
+  .notification .avatar {
     $avatar-width: 30px;
 
     @extend .mr7;

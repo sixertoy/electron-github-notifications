@@ -4,6 +4,18 @@
   @return ($intSize * 1px);
 }
 
+@mixin sizeto($pixelSize) {
+  width: $pixelSize;
+  height: $pixelSize;
+  min-width: $pixelSize;
+  min-height: $pixelSize;
+  line-height: $pixelSize;
+}
+
+@mixin radius($pixelSize) {
+  border-radius: $pixelSize / 2;
+}
+
 // Mixin that will include the fall back px declaration as well as the calculated rem value.
 @mixin font-size-to-rem($pixelSize) {
   @include rem(font-size, $pixelSize);

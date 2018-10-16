@@ -1,5 +1,6 @@
-const normalize = obj => {
+const normalize = formatDate => obj => {
   if (!obj) return null;
+  const { date } = obj.commit.author;
   const user = obj.author || obj.committer || {};
   return {
     author: {
@@ -9,7 +10,8 @@ const normalize = obj => {
     },
     comments: obj.commit.comment_count,
     content: obj.commit.message,
-    date: obj.commit.author.date,
+    date,
+    humandate: formatDate(date),
     icon: 'git-commit',
     id: obj.sha,
     title: null,

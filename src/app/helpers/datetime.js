@@ -1,16 +1,18 @@
+const opts = {
+  day: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  month: 'long',
+  timeZone: 'Europe/Paris',
+  weekday: 'long',
+  year: 'numeric',
+};
+const formatzone = 'fr-FR';
+const formatter = new Intl.DateTimeFormat(formatzone, opts);
+
 export const datetime = value => {
   const date = new Date(value);
-  const day = date.toLocaleDateString('fr-FR', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-    weekday: 'long',
-  });
-  const time = date.toLocaleTimeString('fr-FR', {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-  return `${day} à ${time}`;
+  return formatter.format(date);
 };
 
 export default datetime;

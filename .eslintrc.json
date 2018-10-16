@@ -26,9 +26,13 @@
     "sort-vars": [2, { "ignoreCase": true }],
     "indent": [2, 2, { "SwitchCase": 0 }],
     "no-underscore-dangle": [2, { "allow": ["_id", "__INSTANCE__"] }],
-    "react/jsx-one-expression-per-line": 0,
-    "react/jsx-first-prop-new-line": [2, "multiline-multiprop"],
     "react/forbid-prop-types": [2, { "forbid": ["any"] }],
-    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-first-prop-new-line": [2, "multiline"],
+    "react/jsx-max-props-per-line": [2, {
+      "maximum": 1,
+      "when": "multiline"
+    }]
   }
 }
