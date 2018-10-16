@@ -5,8 +5,11 @@ import parseNotifications from '../../utils/parseNotifications';
 
 const DEFAULT_OPTIONS = {
   assignee: 'none',
+  direction: 'asc',
   page: 0,
   per_page: 100,
+  sort: 'updated',
+  state: 'all',
 };
 
 export const retrieveIssues = (repositories, baseOptions = {}) => {
