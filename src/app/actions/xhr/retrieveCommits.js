@@ -1,25 +1,24 @@
 import Client from '../../core/client';
 import { datetime } from '../../helpers';
-import CommitIssues from '../normalizers/issues';
+import CommitNormalizer from '../normalizers/commits';
 import parseNotifications from '../../utils/parseNotifications';
 
 const DEFAULT_OPTIONS = {
-  assignee: 'none',
   page: 0,
   per_page: 100,
 };
 
-export const retrieveIssues = (repositories, baseOptions = {}) => {
+export const retrieveCommits = (repositories, baseOptions = {}) => {
   const options = { ...DEFAULT_OPTIONS, ...baseOptions };
   const promises = repositories.map(obj => {
     const repo = obj.name;
     const owner = obj.owner.login;
     const opts = { ...options, owner, repo };
-    return Client.fetch('issues.getForRepo', opts);
+    return Client.fetch('repos.getCommits', opts);
   });
   return Promise.all(promises).then(commits =>
-    parseNotifications(commits, CommitIssues(datetime))
+    parseNotifications(commits, CommitNormalizer(datetime))
   );
 };
 
-export default retrieveIssues;
+export default retrieveCommits;
