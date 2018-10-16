@@ -10,7 +10,7 @@ import { selectRepositories } from '../../selectors';
 
 const filterstates = ['all', 'checked', 'unchecked'];
 
-class MyRepositories extends React.PureComponent {
+class Repositories extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = { filtering: 'all' };
@@ -98,7 +98,7 @@ class MyRepositories extends React.PureComponent {
   }
 }
 
-MyRepositories.propTypes = {
+Repositories.propTypes = {
   dispatch: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   // organisations: PropTypes.array.isRequired,
@@ -116,4 +116,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(MyRepositories);
+export default connect(mapStateToProps)(Repositories);

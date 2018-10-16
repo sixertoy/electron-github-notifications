@@ -1,15 +1,8 @@
-import HomePage from './app/pages/HomePage';
 import ChannelPage from './app/pages/ChannelPage';
 import SettingsPage from './app/pages/SettingsPage';
 
 const Routes = {
   main: [
-    {
-      component: HomePage,
-      icon: 'octoface',
-      name: 'Home',
-      path: '/',
-    },
     {
       component: ChannelPage,
       icon: 'bell',

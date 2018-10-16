@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 
 // application
 import { usedebug } from './app/core/config';
@@ -48,8 +48,9 @@ const Main = ({ location }) => (
       </div>
       <div id="application-body" className="flex-1 is-relative no-overflow">
         <Switch>
-          <Route exact path="/login" component={Login} />
           {Routes.main.map(buildRoute)}
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/" render={() => <Redirect to="/channel" />} />
           <Route component={NoMatch} />
         </Switch>
       </div>

@@ -6,7 +6,7 @@ import Loader from '../../components/Loader';
 import { logout } from '../../actions';
 import { retrieveUser } from '../../actions/xhr';
 
-class MyProfile extends React.PureComponent {
+class UserProfile extends React.PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(retrieveUser());
@@ -43,7 +43,7 @@ class MyProfile extends React.PureComponent {
   }
 }
 
-MyProfile.propTypes = {
+UserProfile.propTypes = {
   dispatch: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired,
@@ -54,4 +54,4 @@ const mapStateToProps = ({ loading, user }) => ({
   user,
 });
 
-export default connect(mapStateToProps)(MyProfile);
+export default connect(mapStateToProps)(UserProfile);

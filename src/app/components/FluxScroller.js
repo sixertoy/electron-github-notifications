@@ -1,25 +1,37 @@
 import React from 'react';
+import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 
 class FluxScroller extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = { page: 0 };
+    this.fluxScrollerContainer = React.createRef();
+    this.state = { firstheight: 0, page: 1, scrollposition: 0 };
   }
 
   componentDidMount() {
-    const { container } = this.props;
-    container.addEventListener('scroll', this.handleScroll);
+    const current = this.getCurrent();
+    current.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentDidUpdate() {
+    const { provider } = this.props;
+    const { firstheight, scrollposition } = this.state;
+    if (!provider.length) return;
+    const nextposition = scrollposition - firstheight;
+    this.scrollToNextPosition(nextposition);
   }
 
   componentWillUnmount() {
-    const { container } = this.props;
-    container.removeEventListener('scroll', this.handleScroll);
+    const current = this.getCurrent();
+    current.removeEventListener('scroll', this.handleScroll);
   }
 
+  getCurrent = () => this.fluxScrollerContainer.current;
+
   handleScroll = () => {
-    const { loadMore } = this.props;
-    const { current } = this.fluxScroller;
+    const { loadMoreHandler } = this.props;
+    const current = this.getCurrent();
     const shouldRequest = current.scrollTop <= 0;
     if (!shouldRequest) return;
     const getNextState = prev => {
@@ -28,30 +40,35 @@ class FluxScroller extends React.PureComponent {
       const firstheight = current.firstChild.clientHeight;
       return { firstheight, page, scrollposition };
     };
-    const loadMoreCallback = () => {
+    this.setState(getNextState, () => {
       const { page } = this.state;
-      loadMore(page);
-    };
-    this.setState(getNextState, loadMoreCallback);
+      loadMoreHandler(page);
+    });
   };
 
   scrollToNextPosition = position => {
-    const { container } = this.props;
-    const { clientHeight, scrollHeight } = container;
+    const current = this.getCurrent();
+    const { clientHeight, scrollHeight } = current;
     const nextPosition = scrollHeight - position - clientHeight;
-    container.scrollTop = nextPosition;
+    current.scrollTop = nextPosition;
   };
 
   render() {
-    return children;
+    const { provider, render } = this.props;
+    const omitted = ['loadMoreHandler', 'provider', 'render'];
+    const props = omit(this.props, omitted);
+    return (
+      <div ref={this.fluxScrollerContainer} {...props}>
+        {provider && provider.map(render)}
+      </div>
+    );
   }
 }
 
 FluxScroller.propTypes = {
-  children: PropTypes.array.isRequired,
-  container: PropTypes.element.isRequired,
-  loadMore: PropTypes.func.isRequired,
+  loadMoreHandler: PropTypes.func.isRequired,
   provider: PropTypes.array.isRequired,
   render: PropTypes.func.isRequired,
 };
+
 export default FluxScroller;
