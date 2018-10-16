@@ -5,7 +5,8 @@ export const notifications = (state = [], action) => {
   case Types.ON_CHANNEL_CHANGE:
     return [];
   case Types.ON_NOTIFICATIONS_LOADED:
-    return [...action.payload];
+    console.log('Types.ON_NOTIFICATIONS_LOADED');
+    return [...action.payload, ...state];
   default:
     return state;
   }
