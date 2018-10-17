@@ -10,9 +10,11 @@ export const retrieveFlux = (channelid, page) => (dispatch, getState) => {
     channel.repositories.includes(obj.id)
   );
   dispatch(onLoadingStart());
-  const issues = retrieveIssues(repos, { page });
-  const commits = retrieveCommits(repos, { page });
-  return Promise.all([commits, issues])
+  const promises = [
+    retrieveIssues(repos, { page }),
+    retrieveCommits(repos, { page }),
+  ];
+  return Promise.all(promises)
     .then(arrays => {
       const payload = arrays.reduce((acc, arr) => [...acc, ...arr], []);
       dispatch(onLoadingCompleted());

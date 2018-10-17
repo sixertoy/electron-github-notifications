@@ -1,22 +1,43 @@
-const normalize = formatDate => obj => {
+import moment from 'moment';
+
+const getIssueIconByState = state => {
+  switch (state) {
+  case 'open':
+    return `issue-opened`;
+  case 'closed':
+    return `issue-closed`;
+  case 'reopened':
+    return `issue-reopened`;
+  default:
+    return 'bug';
+  }
+};
+
+const normalize = (formatDate, repo) => obj => {
   if (!obj) return null;
+  const { comments, id, state, title, number } = obj;
   const user = obj.user || {};
   const date = obj.updated_at;
-  const icon = (obj.pull_request && 'git-pull-request') || 'issue-opened';
-  const type = (obj.pull_request && 'pull_request') || 'issue';
+  const isPullRequest = obj.pull_request || false;
+  const type = (isPullRequest && 'pull_request') || 'issue';
+  const icon =
+    (isPullRequest && 'git-pull-request') || getIssueIconByState(state);
   return {
     author: {
       avatar: user.avatar_url,
       name: user.login,
       url: user.url,
     },
-    comments: obj.comments,
+    comments,
     content: obj.body,
     date,
+    datefrom: moment(date).fromNow(),
     humandate: formatDate(date),
     icon,
-    id: obj.id,
-    title: obj.title,
+    id,
+    number,
+    repo,
+    title,
     type,
     url: obj.html_url,
   };

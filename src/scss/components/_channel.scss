@@ -4,43 +4,8 @@
   max-width: 80px;
 }
 
-#channel-notifications {
-  border-radius: 12px;
-
-  .list {
-    background-color: $white;
-  }
-
-  .notification {
-    @extend .p12;
-  }
-
-  .notification + .notification {
-    @extend .mt12;
-  }
-
-  .notification .badge {
-    @extend .no-overflow;
-    @extend .text-center;
-
-    @include radius(30px);
-    @include sizeto(30px);
-
-    color: $white;
-    background-color: $black;
-  }
-
-  .notification .avatar {
-    $avatar-width: 30px;
-
-    @extend .mr7;
-
-    width: $avatar-width;
-    height: $avatar-width;
-    min-width: $avatar-width;
-    min-height: $avatar-width;
-    border-radius: $avatar-width / 2;
-  }
+#channel-notifications .notification + .notification {
+  @extend .mt24;
 }
 
 #channel-sidebar-navigation {

@@ -1,12 +1,12 @@
-import ChannelPage from './app/pages/ChannelPage';
+import FluxPage from './app/pages/flux';
 import SettingsPage from './app/pages/SettingsPage';
 
 const Routes = {
   main: [
     {
-      component: ChannelPage,
+      component: FluxPage,
       icon: 'bell',
-      name: 'ChannelPage',
+      name: 'FluxPage',
       path: '/channel/:view?',
     },
     {

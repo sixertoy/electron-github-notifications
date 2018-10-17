@@ -4,11 +4,11 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 
-import { retrieveRepositories } from '../actions/xhr';
-import Flux from './channels/Flux';
-import Sidebar from './channels/Sidebar';
-import Loader from '../components/Loader';
-import CreateChannel from './channels/CreateChannel';
+import { retrieveRepositories } from '../../actions/xhr';
+import Loader from '../../components/Loader';
+import Flux from './Flux';
+import Sidebar from './Sidebar';
+import CreateChannel from './CreateChannel';
 
 class ChannelPage extends React.PureComponent {
   componentDidMount() {
@@ -35,30 +35,28 @@ class ChannelPage extends React.PureComponent {
         </div>
         {!hasRepositories && <Loader />}
         {hasRepositories && (
-          <div className="flex-1">
-            <Switch location={location}>
-              <Route
-                exact
-                key="add-channel-route"
-                path="/channel"
-                render={() =>
-                  lastchannel && <Redirect to={`/channel/${channelid}`} />
-                }
-              />
-              <Route
-                exact
-                key="add-channel-route"
-                path="/channel/create"
-                component={CreateChannel}
-              />
-              <Route
-                exact
-                key="channel-route"
-                path="/channel/:id"
-                component={Flux}
-              />
-            </Switch>
-          </div>
+          <Switch location={location}>
+            <Route
+              exact
+              key="add-channel-route"
+              path="/channel"
+              render={() =>
+                lastchannel && <Redirect to={`/channel/${channelid}`} />
+              }
+            />
+            <Route
+              exact
+              key="add-channel-route"
+              path="/channel/create"
+              component={CreateChannel}
+            />
+            <Route
+              exact
+              key="channel-route"
+              path="/channel/:id"
+              component={Flux}
+            />
+          </Switch>
         )}
       </div>
     );

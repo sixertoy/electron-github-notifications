@@ -1,14 +1,12 @@
 import Client from '../../core/client';
 import { datetime } from '../../helpers';
-import CommitIssues from '../normalizers/issues';
-import parseNotifications from '../../utils/parseNotifications';
+import issueNormalizer from '../normalizers/issues';
+// import parseNotifications from '../../utils/parseNotifications';
 
 const DEFAULT_OPTIONS = {
   assignee: 'none',
-  direction: 'asc',
   page: 0,
   per_page: 100,
-  sort: 'updated',
   state: 'all',
 };
 
@@ -18,10 +16,17 @@ export const retrieveIssues = (repositories, baseOptions = {}) => {
     const repo = obj.name;
     const owner = obj.owner.login;
     const opts = { ...options, owner, repo };
-    return Client.fetch('issues.getForRepo', opts);
+    return Client.fetch('issues.getForRepo', opts).then(({ data, status }) => {
+      if (status !== 200) {
+        const msg = `${repo} Issues load error with status: ${status}`;
+        throw new Error(msg);
+      }
+      const normalize = issueNormalizer(datetime, repo);
+      return data.map(normalize);
+    });
   });
-  return Promise.all(promises).then(commits =>
-    parseNotifications(commits, CommitIssues(datetime))
+  return Promise.all(promises).then(promise =>
+    promise.reduce((acc, arr) => [...acc, ...arr], [])
   );
 };
 

@@ -35,10 +35,11 @@
   user-select: none;
 }
 
-a.no-decoration,
-a.no-decoration:hover,
-a.no-decoration:active,
-a.no-decoration:visited {
+.no-underline,
+a.no-underline,
+a.no-underline:hover,
+a.no-underline:active,
+a.no-underline:visited {
   text-decoration: none;
 }
 

@@ -22,8 +22,6 @@ class CreateChannel extends React.PureComponent {
     const { dispatch, history } = this.props;
     let slug = slugify(values.name);
     slug = slug.toLowerCase();
-    // const icon = `https://identicons.github.com/${slug}.png`;
-    // const icon = `https://identicon-api.herokuapp.com/${slug}/100?format=png`;
     const icon = `http://identicon.org?t=${slug}&s=100`;
     const opts = { icon, slug, ...values };
     dispatch(createChannel(opts));
@@ -49,7 +47,7 @@ class CreateChannel extends React.PureComponent {
     const { initialValues, loading, selected } = this.props;
     const hasWatched = selected && selected.length > 0;
     return (
-      <div id="flux-channel-create">
+      <div id="flux-channel-create" className="flex-1">
         {loading && <Loader />}
         {!loading &&
           !hasWatched && (
@@ -67,16 +65,25 @@ class CreateChannel extends React.PureComponent {
                 <div className="final-form-row">{this.renderNameInput()}</div>
                 <div className="final-form-row">
                   {selected.map(obj => (
-                    <label key={obj.id} htmlFor={`repo_${obj.id}`}>
-                      <Field
-                        id={`repo_${obj.id}`}
-                        value={obj.id}
-                        type="checkbox"
-                        component="input"
-                        name="repositories"
-                      />
-                      <span>{obj.name}</span>
-                    </label>
+                    <Field
+                      key={obj.id}
+                      value={obj.id}
+                      name="repositories"
+                      render={({ input }) => (
+                        <label
+                          htmlFor={`repo_${obj.id}`}
+                          className="is-block mb12"
+                        >
+                          <input
+                            {...input}
+                            className="mr7"
+                            type="checkbox"
+                            id={`repo_${obj.id}`}
+                          />
+                          <span>{obj.name}</span>
+                        </label>
+                      )}
+                    />
                   ))}
                 </div>
                 <div className="final-form-row">

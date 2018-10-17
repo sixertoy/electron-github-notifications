@@ -1,0 +1,27 @@
+.shadow-bl {
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.07);
+}
+
+.is-white-text {
+  color: $grey;
+}
+
+.is-grey-text {
+  color: $grey;
+}
+
+.is-black-text {
+  color: $black;
+}
+
+.is-text-dark-grey {
+  color: $dark-grey;
+}
+
+.is-white-background {
+  background-color: $white;
+}
+
+.is-black-link {
+  @include link($black);
+}

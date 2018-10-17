@@ -22,7 +22,7 @@ class Flux extends React.PureComponent {
   render() {
     const { loading, notifications } = this.props;
     return (
-      <React.Fragment>
+      <div className="flex-1">
         {loading && <Loader />}
         <FluxScroller
           provider={notifications}
@@ -31,7 +31,7 @@ class Flux extends React.PureComponent {
           loadMoreHandler={this.loadMoreNotifications}
           render={obj => <Notification key={obj.id} item={obj} />}
         />
-      </React.Fragment>
+      </div>
     );
   }
 }

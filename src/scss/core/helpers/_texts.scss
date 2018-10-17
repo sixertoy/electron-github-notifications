@@ -14,6 +14,10 @@
   text-transform: uppercase;
 }
 
+.is-capitalized {
+  text-transform: capitalize;
+}
+
 .text-left {
   text-align: left;
 }
@@ -26,17 +30,6 @@
   text-align: center;
 }
 
-/* ------------------------------------------------
-
- Helpers:
- - color
- - style
- - align
-
------------------------------------------------- */
-
-/* ------ ALIGN */
-
 .text-justify {
   text-align: justify;
 }
@@ -46,26 +39,12 @@
   text-overflow: ellipsis;
 }
 
-.is-white-text,
-a.is-white-text,
-a.is-white-text:hover {
-  color: $white;
-}
-
-.is-black-text {
-  color: $black;
-}
-
 .is-light {
   font-weight: 300;
 }
 
-.is-normal {
+.is-regular {
   font-weight: 400;
-}
-
-.is-medium {
-  font-weight: 500;
 }
 
 .is-semi-bold {
@@ -76,19 +55,10 @@ a.is-white-text:hover {
   font-weight: 700;
 }
 
-.is-extra-bold {
-  font-weight: 800;
+.is-white-text {
+  color: $white;
 }
 
-/* ------ STYLE */
-
-.is-underline,
-a.is-underline,
-a:link.is-underline {
-  text-decoration: underline;
-}
-
-.is-capitalized {
-  // capitalize each words first letter
-  text-transform: capitalize;
+.is-black-text {
+  color: $black;
 }

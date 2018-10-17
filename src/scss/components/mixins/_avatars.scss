@@ -1,0 +1,26 @@
+.avatar {
+  @extend .no-overflow;
+  @extend .is-inline-block;
+
+  border-radius: 4px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+$intSizes: (15, 30, 60);
+
+@each $intSize in $intSizes {
+  $pixelValue: number-to-pixel($intSize);
+
+  .avatar-#{$intSize} {
+    @extend .avatar;
+
+    width: $pixelValue;
+    height: $pixelValue;
+    min-width: $pixelValue;
+    min-height: $pixelValue;
+  }
+}
