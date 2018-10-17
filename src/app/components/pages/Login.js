@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Form, Field } from 'react-final-form';
 
-import { login } from '../actions';
-import { retrieveUser } from '../actions/xhr';
-import Client from '../core/client';
+import { login } from '../../actions';
+import { retrieveUser } from '../../actions/xhr';
+import Client from '../../core/client';
 
 const renderTokenField = input => (
   <label htmlFor="token">

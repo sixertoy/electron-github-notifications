@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import { changeChannel } from '../../actions';
+import { changeChannel } from '../actions';
 
 class Sidebar extends React.PureComponent {
   channelClickHandler = id => {
@@ -31,7 +31,7 @@ class Sidebar extends React.PureComponent {
   render() {
     const { data } = this.props;
     return (
-      <nav id="channel-sidebar-navigation" className="flex-rows">
+      <nav id="application-sidebar" className="flex-0 flex-rows items-center">
         {data && data.map(this.renderChannelLink)}
         <NavLink
           key="add-channel-button"

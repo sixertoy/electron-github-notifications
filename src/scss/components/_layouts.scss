@@ -11,3 +11,29 @@
   height: 100%;
   max-height: 100vh;
 }
+
+#application-sidebar {
+  @include width(80px);
+
+  @extend .p12;
+
+  background-color: blue;
+
+  .item {
+    @extend .p5;
+    @extend .no-overflow;
+    @extend .text-center;
+    @extend .is-white-background;
+
+    @include size(35px);
+  }
+
+  .item + .item {
+    @extend .mt12;
+  }
+
+  .active {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}

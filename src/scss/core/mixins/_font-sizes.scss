@@ -2,6 +2,11 @@
 // Exemple: .fs18, .fs32...
 $intSizes: (11, 12, 13, 14, 15, 16, 18, 19, 20, 22, 30, 32, 36, 48, 52, 60, 80);
 
+// Mixin that will include the fall back px declaration as well as the calculated rem value.
+@mixin font-size-to-rem($pixelSize) {
+  @include rem(font-size, $pixelSize);
+}
+
 @each $intSize in $intSizes {
   $pixelValue: number-to-pixel($intSize);
 

@@ -1,16 +1,16 @@
-import FluxPage from './app/pages/flux';
-import SettingsPage from './app/pages/SettingsPage';
+import Settings from './app/components/pages/settings';
+import Notifications from './app/components/pages/notifications';
 
 const Routes = {
   main: [
     {
-      component: FluxPage,
+      component: Notifications,
       icon: 'bell',
-      name: 'FluxPage',
+      name: 'Notifications',
       path: '/channel/:view?',
     },
     {
-      component: SettingsPage,
+      component: Settings,
       icon: 'gear',
       name: 'Settings',
       path: '/settings',

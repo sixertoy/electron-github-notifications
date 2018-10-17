@@ -1,0 +1,9 @@
+$intSizes: (4, 8, 12, 16, 20, 24, 32);
+
+@each $intSize in $intSizes {
+  $pixelValue: number-to-pixel($intSize);
+
+  .br#{$intSize} {
+    border-radius: $pixelValue;
+  }
+}

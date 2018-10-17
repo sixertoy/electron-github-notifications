@@ -18,9 +18,6 @@ $intSizes: (15, 30, 60);
   .avatar-#{$intSize} {
     @extend .avatar;
 
-    width: $pixelValue;
-    height: $pixelValue;
-    min-width: $pixelValue;
-    min-height: $pixelValue;
+    @include size($pixelValue);
   }
 }

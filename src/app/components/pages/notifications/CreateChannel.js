@@ -8,9 +8,9 @@ import { Field, Form } from 'react-final-form';
 import { compose } from 'redux';
 import { Link, withRouter } from 'react-router-dom';
 
-import { createChannel } from '../../actions';
-import { retrieveRepositories } from '../../actions/xhr';
-import Loader from '../../components/Loader';
+import { createChannel } from '../../../actions';
+import { retrieveRepositories } from '../../../actions/xhr';
+import Loader from '../../Loader';
 
 class CreateChannel extends React.PureComponent {
   componentDidMount() {

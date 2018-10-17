@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 
-import { retrieveFlux } from '../../actions';
-import Loader from '../../components/Loader';
-import FluxScroller from '../../components/FluxScroller';
-import Notification from '../../components/Notification';
+import { retrieveFlux } from '../../../actions';
+import Loader from '../../Loader';
+import Notification from '../../Notification';
+import Scroller from '../../Scroller';
 
-class Flux extends React.PureComponent {
+class Notifications extends React.PureComponent {
   componentDidMount() {
     this.loadMoreNotifications();
   }
@@ -22,12 +22,11 @@ class Flux extends React.PureComponent {
   render() {
     const { loading, notifications } = this.props;
     return (
-      <div className="flex-1">
+      <div id="channel-notifications" className="flex-1 mb30">
         {loading && <Loader />}
-        <FluxScroller
+        <Scroller
           provider={notifications}
-          id="channel-notifications"
-          className="scroll-y is-full-height mr12"
+          className="is-full-height scroll-y"
           loadMoreHandler={this.loadMoreNotifications}
           render={obj => <Notification key={obj.id} item={obj} />}
         />
@@ -36,7 +35,7 @@ class Flux extends React.PureComponent {
   }
 }
 
-Flux.propTypes = {
+Notifications.propTypes = {
   channelid: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
@@ -57,4 +56,4 @@ const mapStateToProps = (state, { match }) => {
 export default compose(
   withRouter,
   connect(mapStateToProps)
-)(Flux);
+)(Notifications);

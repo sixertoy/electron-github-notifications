@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Loader from '../../components/Loader';
-import { logout } from '../../actions';
-import { retrieveUser } from '../../actions/xhr';
+import { logout } from '../../../actions';
+import { retrieveUser } from '../../../actions/xhr';
+import Loader from '../../Loader';
 
 class UserProfile extends React.PureComponent {
   componentDidMount() {

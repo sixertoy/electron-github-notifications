@@ -4,11 +4,10 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 
-import { retrieveRepositories } from '../../actions/xhr';
-import Loader from '../../components/Loader';
-import Flux from './Flux';
-import Sidebar from './Sidebar';
+import { retrieveRepositories } from '../../../actions/xhr';
+import Notifications from './Notifications';
 import CreateChannel from './CreateChannel';
+import Loader from '../../Loader';
 
 class ChannelPage extends React.PureComponent {
   componentDidMount() {
@@ -30,9 +29,6 @@ class ChannelPage extends React.PureComponent {
     const hasRepositories = repositories && repositories.length > 0;
     return (
       <div id="channel-page" className="flex-columns is-full-height">
-        <div id="channel-sidebar" className="flex-0 flex-rows items-center">
-          <Sidebar />
-        </div>
         {!hasRepositories && <Loader />}
         {hasRepositories && (
           <Switch location={location}>
@@ -54,7 +50,7 @@ class ChannelPage extends React.PureComponent {
               exact
               key="channel-route"
               path="/channel/:id"
-              component={Flux}
+              component={Notifications}
             />
           </Switch>
         )}

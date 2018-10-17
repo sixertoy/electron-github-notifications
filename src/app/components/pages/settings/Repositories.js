@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Loader from '../../components/Loader';
-import Repository from '../../components/Repository';
-import { subscribe, unsubscribe } from '../../actions';
-import { retrieveRepositories } from '../../actions/xhr';
-import { selectRepositories } from '../../selectors';
+import { subscribe, unsubscribe } from '../../../actions';
+import { retrieveRepositories } from '../../../actions/xhr';
+import { selectRepositories } from '../../../selectors';
+import Loader from '../../Loader';
+import Repository from '../../Repository';
 
 const filterstates = ['all', 'checked', 'unchecked'];
 

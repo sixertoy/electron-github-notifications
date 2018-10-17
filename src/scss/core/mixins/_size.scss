@@ -1,0 +1,16 @@
+@mixin height($pixelSize) {
+  height: $pixelSize;
+  min-height: $pixelSize;
+  max-height: $pixelSize;
+}
+
+@mixin width($pixelSize) {
+  width: $pixelSize;
+  min-width: $pixelSize;
+  max-width: $pixelSize;
+}
+
+@mixin size($pixelSize) {
+  @include width($pixelSize);
+  @include height($pixelSize);
+}
