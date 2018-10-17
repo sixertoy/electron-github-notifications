@@ -6,10 +6,21 @@
   @extend .mt12;
 }
 
+.flux-scroller {
+  @extend .scroll-y;
+  @extend .is-full-height;
+}
+
 #root,
 #app-container {
   height: 100%;
   max-height: 100vh;
+}
+
+#application-page,
+#application-sidebar {
+  @extend .no-overflow;
+  @extend .is-full-height;
 }
 
 #application-sidebar {

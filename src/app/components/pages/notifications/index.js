@@ -28,7 +28,7 @@ class ChannelPage extends React.PureComponent {
     const channelid = lastchannel || firstchannel;
     const hasRepositories = repositories && repositories.length > 0;
     return (
-      <div id="channel-page" className="flex-columns is-full-height">
+      <div id="application-page" className="is-full-height">
         {!hasRepositories && <Loader />}
         {hasRepositories && (
           <Switch location={location}>

@@ -5,7 +5,7 @@ import UserProfile from './UserProfile';
 import Repositories from './Repositories';
 
 const Settings = () => (
-  <div id="settings-page" className="p12 is-full-height no-overflow flex-rows">
+  <div id="application-page" className="p12 is-full-height">
     <UserProfile />
     <Channels />
     <Repositories />

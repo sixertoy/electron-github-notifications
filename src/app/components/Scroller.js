@@ -2,7 +2,7 @@ import React from 'react';
 import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 
-class FluxScroller extends React.PureComponent {
+class Scroller extends React.PureComponent {
   constructor(props) {
     super(props);
     this.fluxScrollerContainer = React.createRef();
@@ -54,21 +54,30 @@ class FluxScroller extends React.PureComponent {
   };
 
   render() {
-    const { provider, render } = this.props;
-    const omitted = ['loadMoreHandler', 'provider', 'render'];
+    const { className, provider, render } = this.props;
+    const omitted = ['className', 'loadMoreHandler', 'provider', 'render'];
     const props = omit(this.props, omitted);
     return (
-      <div ref={this.fluxScrollerContainer} {...props}>
+      <div
+        ref={this.fluxScrollerContainer}
+        className={`flux-scroller ${className}`}
+        {...props}
+      >
         {provider && provider.map(render)}
       </div>
     );
   }
 }
 
-FluxScroller.propTypes = {
+Scroller.defaultProps = {
+  className: '',
+};
+
+Scroller.propTypes = {
+  className: PropTypes.string,
   loadMoreHandler: PropTypes.func.isRequired,
   provider: PropTypes.array.isRequired,
   render: PropTypes.func.isRequired,
 };
 
-export default FluxScroller;
+export default Scroller;
