@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const normalize = (formatDate, repo) => obj => {
+const normalize = (formatDate, repo, branch = 'master') => obj => {
   if (!obj) return null;
   const { date } = obj.commit.author;
   const user = obj.author || obj.committer || {};
@@ -12,6 +12,7 @@ const normalize = (formatDate, repo) => obj => {
       name: user.login,
       url: user.url,
     },
+    branch,
     comments: obj.commit.comment_count,
     content: obj.commit.message,
     date,

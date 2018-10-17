@@ -11,6 +11,7 @@
     "lodash.get": "^4.4.2",
     "lodash.omit": "^4.5.0",
     "lodash.pick": "^4.4.0",
+    "lodash.uniqby": "^4.7.0",
     "moment": "^2.22.2",
     "octicons": "^8.1.0",
     "prop-types": "15.6.2",

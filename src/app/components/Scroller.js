@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 class Scroller extends React.PureComponent {
   constructor(props) {
     super(props);
+    const { startPage } = this.props;
     this.fluxScrollerContainer = React.createRef();
-    this.state = { firstheight: 0, page: 1, scrollposition: 0 };
+    this.state = { firstheight: 0, page: startPage, scrollposition: 0 };
   }
 
   componentDidMount() {
@@ -65,6 +66,7 @@ class Scroller extends React.PureComponent {
       'provider',
       'render',
       'showReload',
+      'startPage',
     ]);
     return (
       <div className="flux-scroller is-relative" {...props}>
@@ -97,6 +99,7 @@ class Scroller extends React.PureComponent {
 Scroller.defaultProps = {
   className: '',
   showReload: true,
+  startPage: 1,
 };
 
 Scroller.propTypes = {
@@ -105,6 +108,7 @@ Scroller.propTypes = {
   provider: PropTypes.array.isRequired,
   render: PropTypes.func.isRequired,
   showReload: PropTypes.bool,
+  startPage: PropTypes.number,
 };
 
 export default Scroller;

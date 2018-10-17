@@ -8,10 +8,6 @@
   @extend .is-full-height;
 }
 
-.flux-scroller-inner > .item {
-  @extend .p12;
-}
-
 .flux-scroller-inner > .item:last-child {
   @extend .mb30;
 }

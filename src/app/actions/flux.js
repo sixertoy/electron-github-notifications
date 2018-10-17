@@ -1,9 +1,11 @@
+import uniqBy from 'lodash.uniqby';
+
 import { sortByDate } from '../helpers';
-import { retrieveCommits, retrieveIssues } from './xhr';
 import { onLoadingCompleted, onLoadingStart } from './loading';
+import { getBranchesCommits, getIssues } from './xhr';
 import Types from './Types';
 
-export const retrieveFlux = (channelid, page) => (dispatch, getState) => {
+export const retrieveFlux = (channelid, config) => (dispatch, getState) => {
   const { channels, repositories } = getState();
   const channel = channels.find(obj => obj.id === channelid);
   const repos = repositories.filter(obj =>
@@ -11,15 +13,20 @@ export const retrieveFlux = (channelid, page) => (dispatch, getState) => {
   );
   dispatch(onLoadingStart());
   const promises = [
-    retrieveIssues(repos, { page }),
-    retrieveCommits(repos, { page }),
+    getIssues(repos, config),
+    getBranchesCommits(repos, config),
   ];
   return Promise.all(promises)
     .then(arrays => {
-      const payload = arrays.reduce((acc, arr) => [...acc, ...arr], []);
+      let payload = arrays.reduce(
+        (acc, arr) => (arr && [...acc, ...arr]) || acc,
+        []
+      );
+      payload = uniqBy(payload, 'id');
+      payload = sortByDate(payload, false);
       dispatch(onLoadingCompleted());
       dispatch({
-        payload: sortByDate(payload, false),
+        payload,
         type: Types.ON_NOTIFICATIONS_LOADED,
       });
     })

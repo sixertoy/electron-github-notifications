@@ -15,7 +15,7 @@ const Notification = ({ item }) => {
   const itemTitle = title || content;
   // const itemContent = (!title && content !== itemTitle && content) || null;
   return (
-    <div className="notification flex-columns">
+    <div className="notification mt12 mx12 flex-columns">
       <div className="flex-0 mr12">
         <div>
           <i className={`icon-${icon} px5 mr12`} />

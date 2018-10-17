@@ -6,17 +6,22 @@ import { compose } from 'redux';
 
 import { retrieveFlux } from '../../../actions';
 import Loader from '../../Loader';
-import Notification from '../../Notification';
+import SmallNotification from './SmallNotification';
+import MasterNotification from './MasterNotification';
 import Scroller from '../../Scroller';
+
+const PER_PAGE = 20;
+const START_PAGE = 1;
 
 class Notifications extends React.PureComponent {
   componentDidMount() {
-    this.loadMoreNotifications();
+    this.loadMoreNotifications(START_PAGE);
   }
 
-  loadMoreNotifications = (page = 1) => {
+  loadMoreNotifications = page => {
     const { channelid, dispatch } = this.props;
-    dispatch(retrieveFlux(channelid, page));
+    const config = { page, per_page: PER_PAGE };
+    dispatch(retrieveFlux(channelid, config));
   };
 
   render() {
@@ -26,9 +31,15 @@ class Notifications extends React.PureComponent {
         {loading && <Loader />}
         <Scroller
           id="notifications"
+          startPage={START_PAGE}
           provider={notifications}
           loadMoreHandler={this.loadMoreNotifications}
-          render={obj => <Notification item={obj} />}
+          render={obj => {
+            const usemaster = !obj.branch || obj.branch === 'master';
+            const Component =
+              (usemaster && MasterNotification) || SmallNotification;
+            return <Component item={obj} />;
+          }}
         />
       </div>
     );

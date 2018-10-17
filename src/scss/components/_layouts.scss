@@ -16,6 +16,10 @@
   background-color: $grey;
 }
 
+.notification.small {
+  opacity: 0.5;
+}
+
 #root,
 #app-container {
   height: 100%;
