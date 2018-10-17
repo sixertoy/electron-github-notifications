@@ -36,7 +36,7 @@ class Sidebar extends React.PureComponent {
         <NavLink
           key="add-channel-button"
           to="/channel/create"
-          className="item last-item"
+          className="item last-item br4"
         >
           <i className="icon-plus" />
         </NavLink>

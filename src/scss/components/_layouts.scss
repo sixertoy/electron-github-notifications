@@ -32,11 +32,14 @@
 
   .item {
     @extend .p5;
+    @extend .br4;
     @extend .no-overflow;
     @extend .text-center;
     @extend .is-white-background;
 
-    @include size(35px);
+    @include size(36px);
+
+    line-height: 24px;
   }
 
   .item + .item {
