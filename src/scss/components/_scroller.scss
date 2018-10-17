@@ -1,0 +1,29 @@
+.flux-scroller {
+  @extend .is-relative;
+  @extend .is-full-height;
+}
+
+.flux-scroller-inner {
+  @extend .scroll-y;
+  @extend .is-full-height;
+}
+
+.flux-scroller-inner > .item {
+  @extend .p12;
+}
+
+.flux-scroller-inner > .item:last-child {
+  @extend .mb30;
+}
+
+.flux-scroller-reloader {
+  @extend .is-absolute;
+
+  top: 100%;
+  width: 100px;
+  height: 30px;
+  margin: 0 auto;
+  margin-top: -35px;
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.5);
+}

@@ -13,15 +13,12 @@ const Notification = ({ item }) => {
     url,
   } = item;
   const itemTitle = title || content;
-  const itemContent = (!title && content !== itemTitle && content) || null;
+  // const itemContent = (!title && content !== itemTitle && content) || null;
   return (
-    <div className="notification p12 flex-columns">
+    <div className="notification flex-columns">
       <div className="flex-0 mr12">
         <div>
           <i className={`icon-${icon} px5 mr12`} />
-        </div>
-        <div className="avatar-30">
-          <img src={author.avatar} alt="" />
         </div>
       </div>
       <div className="flex-1">
@@ -37,37 +34,23 @@ const Notification = ({ item }) => {
           </span>
           <i className="octicon-clock" />
         </div>
-        <div className="p12 is-white-background shadow-bl">
-          <p className="is-italic fs12">#{number}</p>
-          <p className="is-semi-bold">{itemTitle}</p>
+        <div className="flex-columns p12 is-white-background shadow-bl">
+          <div className="flex-0 avatar-30 mr12">
+            <img src={author.avatar} alt="" />
+          </div>
+          <div className="flex-1">
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="is-black-text no-underline pill is-italic fs12"
+            >
+              <span>#{number}</span>
+            </a>
+            <p className="is-semi-bold">{itemTitle}</p>
+          </div>
         </div>
       </div>
-      {/*
-      <div className="flex-columns items-center mb7">
-        <span className="badge mr7">
-          {icon && <i className={`icon-${icon}`} />}
-        </span>
-        <span className="fs13">
-          <a
-            href={url}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="is-block is-bold"
-          >
-          </a>
-          <span className="is-block">{humandate}</span>
-        </span>
-      </div>
-      <div className="flex-columns">
-        <div className="avatar mr7">
-          <img src={author.avatar} alt="" />
-        </div>
-        <div className="flex-1 content" style={{ maxWidth: '350px' }}>
-          <span className="is-block">{itemTitle}</span>
-          {itemContent && <div className="">{itemContent}</div>}
-        </div>
-      </div>
-      */}
     </div>
   );
 };

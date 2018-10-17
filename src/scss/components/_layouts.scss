@@ -6,9 +6,14 @@
   @extend .mt12;
 }
 
-.flux-scroller {
-  @extend .scroll-y;
-  @extend .is-full-height;
+.pill {
+  width: auto;
+  height: 20px;
+  padding: 3px 12px;
+  margin-bottom: 5px;
+  border-radius: 20px;
+  display: inline-block;
+  background-color: $grey;
 }
 
 #root,

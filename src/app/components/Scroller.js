@@ -53,17 +53,42 @@ class Scroller extends React.PureComponent {
     current.scrollTop = nextPosition;
   };
 
+  reloadHandler = () => {
+    window.location.reload();
+  };
+
   render() {
-    const { className, provider, render } = this.props;
-    const omitted = ['className', 'loadMoreHandler', 'provider', 'render'];
-    const props = omit(this.props, omitted);
+    const { className, provider, render, showReload } = this.props;
+    const props = omit(this.props, [
+      'className',
+      'loadMoreHandler',
+      'provider',
+      'render',
+      'showReload',
+    ]);
     return (
-      <div
-        ref={this.fluxScrollerContainer}
-        className={`flux-scroller ${className}`}
-        {...props}
-      >
-        {provider && provider.map(render)}
+      <div className="flux-scroller is-relative" {...props}>
+        <div
+          ref={this.fluxScrollerContainer}
+          className={`flux-scroller-inner ${className}`}
+        >
+          {provider &&
+            provider.map(obj => (
+              <div key={obj.id} className="item">
+                {render(obj)}
+              </div>
+            ))}
+        </div>
+        {showReload && (
+          <button
+            type="button"
+            onClick={this.reloadHandler}
+            className="flux-scroller-reloader"
+          >
+            <i className="octicon-sync" />
+            <span>Reload</span>
+          </button>
+        )}
       </div>
     );
   }
@@ -71,6 +96,7 @@ class Scroller extends React.PureComponent {
 
 Scroller.defaultProps = {
   className: '',
+  showReload: true,
 };
 
 Scroller.propTypes = {
@@ -78,6 +104,7 @@ Scroller.propTypes = {
   loadMoreHandler: PropTypes.func.isRequired,
   provider: PropTypes.array.isRequired,
   render: PropTypes.func.isRequired,
+  showReload: PropTypes.bool,
 };
 
 export default Scroller;

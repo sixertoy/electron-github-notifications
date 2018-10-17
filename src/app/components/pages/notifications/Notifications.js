@@ -22,12 +22,13 @@ class Notifications extends React.PureComponent {
   render() {
     const { loading, notifications } = this.props;
     return (
-      <div id="notifications" className="is-full-height no-overflow">
+      <div className="is-full-height no-overflow">
         {loading && <Loader />}
         <Scroller
+          id="notifications"
           provider={notifications}
           loadMoreHandler={this.loadMoreNotifications}
-          render={obj => <Notification key={obj.id} item={obj} />}
+          render={obj => <Notification item={obj} />}
         />
       </div>
     );
