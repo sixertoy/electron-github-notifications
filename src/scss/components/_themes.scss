@@ -1,0 +1,17 @@
+.dark-theme {
+  #application-sidebar {
+    background-color: $black;
+  }
+
+  .bordered-bottom {
+    border-bottom: 1px solid $border-grey;
+  }
+
+  .is-white-text {
+    color: $white;
+  }
+
+  .is-black-text {
+    color: $black;
+  }
+}

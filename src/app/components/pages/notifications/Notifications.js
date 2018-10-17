@@ -6,9 +6,10 @@ import { compose } from 'redux';
 
 import { retrieveFlux } from '../../../actions';
 import Loader from '../../Loader';
+import Scroller from './Scroller';
+import Navigation from './Navigation';
 import SmallNotification from './SmallNotification';
 import MasterNotification from './MasterNotification';
-import Scroller from '../../Scroller';
 
 const PER_PAGE = 20;
 const START_PAGE = 1;
@@ -27,20 +28,23 @@ class Notifications extends React.PureComponent {
   render() {
     const { loading, notifications } = this.props;
     return (
-      <div className="is-full-height no-overflow">
+      <div className="is-full-height flex-rows">
         {loading && <Loader />}
-        <Scroller
-          id="notifications"
-          startPage={START_PAGE}
-          provider={notifications}
-          loadMoreHandler={this.loadMoreNotifications}
-          render={obj => {
-            const usemaster = !obj.branch || obj.branch === 'master';
-            const Component =
-              (usemaster && MasterNotification) || SmallNotification;
-            return <Component item={obj} />;
-          }}
-        />
+        <Navigation />
+        <div className="flex-1 no-overflow">
+          <Scroller
+            id="notifications"
+            startPage={START_PAGE}
+            provider={notifications}
+            loadMoreHandler={this.loadMoreNotifications}
+            render={obj => {
+              const usemaster = !obj.branch || obj.branch === 'master';
+              const Component =
+                (usemaster && MasterNotification) || SmallNotification;
+              return <Component item={obj} />;
+            }}
+          />
+        </div>
       </div>
     );
   }

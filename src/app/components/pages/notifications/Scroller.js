@@ -11,7 +11,7 @@ class Scroller extends React.PureComponent {
   }
 
   componentDidMount() {
-    const current = this.getCurrent();
+    const current = this.getScrollContainer();
     current.addEventListener('scroll', this.handleScroll);
   }
 
@@ -24,31 +24,36 @@ class Scroller extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    const current = this.getCurrent();
+    const current = this.getScrollContainer();
     current.removeEventListener('scroll', this.handleScroll);
   }
 
-  getCurrent = () => this.fluxScrollerContainer.current;
+  getScrollContainer = () => this.fluxScrollerContainer.current;
+
+  getScrollNextState = prev => {
+    const current = this.getScrollContainer();
+    const page = prev.page + 1;
+    const scrollposition = current.scrollHeight;
+    const firstheight = current.firstChild.clientHeight;
+    return { firstheight, page, scrollposition };
+  };
+
+  onScrollNextStateChange = () => {
+    const { page } = this.state;
+    const { loadMoreHandler } = this.props;
+    // const config = { page }
+    loadMoreHandler(page);
+  };
 
   handleScroll = () => {
-    const { loadMoreHandler } = this.props;
-    const current = this.getCurrent();
+    const current = this.getScrollContainer();
     const shouldRequest = current.scrollTop <= 0;
     if (!shouldRequest) return;
-    const getNextState = prev => {
-      const page = prev.page + 1;
-      const scrollposition = current.scrollHeight;
-      const firstheight = current.firstChild.clientHeight;
-      return { firstheight, page, scrollposition };
-    };
-    this.setState(getNextState, () => {
-      const { page } = this.state;
-      loadMoreHandler(page);
-    });
+    this.setState(this.getScrollNextState, this.onScrollNextStateChange);
   };
 
   scrollToNextPosition = position => {
-    const current = this.getCurrent();
+    const current = this.getScrollContainer();
     const { clientHeight, scrollHeight } = current;
     const nextPosition = scrollHeight - position - clientHeight;
     current.scrollTop = nextPosition;
@@ -69,11 +74,8 @@ class Scroller extends React.PureComponent {
       'startPage',
     ]);
     return (
-      <div className="flux-scroller is-relative" {...props}>
-        <div
-          ref={this.fluxScrollerContainer}
-          className={`flux-scroller-inner ${className}`}
-        >
+      <div className={`flux-scroller is-relative ${className}`} {...props}>
+        <div ref={this.fluxScrollerContainer} className="flux-scroller-inner">
           {provider &&
             provider.map(obj => (
               <div key={obj.id} className="item">
